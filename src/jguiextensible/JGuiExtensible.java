@@ -48,17 +48,17 @@ public class JGuiExtensible extends JPanel {
         insertGuiList(childrenList, this);
     }
     
-    protected JGuiExtensible insertPanel(JGuiExtensible parent, JGuiExtensible child) {
+    /*  protected JGuiExtensible insertPanel(JGuiExtensible parent, JGuiExtensible child) {
     
     panel.add(child);
     panel.add(parent);
     
     return (JGuiExtensible)panel;
-    }
+    }*/
     
     protected void insertGui(JGuiExtensible child) {
         
-       super.add(child);             
+       add(child);             
     }
     
     protected void insertGuiList(List<JGuiExtensible> childrenList, JGuiExtensible parent) {

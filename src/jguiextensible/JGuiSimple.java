@@ -5,10 +5,7 @@
 package jguiextensible;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 /**
  *
@@ -17,21 +14,19 @@ import javax.swing.JPanel;
 public class JGuiSimple extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;
-    
-    
-    
+      
       public JGuiSimple() {
      
           setBackground(Color.PINK); 
           setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-         // setLayout(new GridLayout(1,0));
+        
     }
     
     @Override
     protected void insertGui(JGuiExtensible gui) {
         
-       super.insertGui(super.insertPanel(this, gui));
-             
+      add(gui);
+               
     }
     
 }
