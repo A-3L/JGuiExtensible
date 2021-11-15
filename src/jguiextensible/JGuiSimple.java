@@ -5,6 +5,10 @@
 package jguiextensible;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridLayout;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 
 /**
@@ -18,13 +22,14 @@ public class JGuiSimple extends JGuiExtensible {
       public JGuiSimple() {
      
           setBackground(Color.PINK); 
-          setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        
+          setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+          add(Box.createHorizontalGlue());
+      
     }
     
     @Override
     protected void insertGui(JGuiExtensible gui) {
-        
+     
       add(gui);
                
     }
