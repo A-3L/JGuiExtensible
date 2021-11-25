@@ -26,7 +26,7 @@ public class JGuiTabbed extends JGuiExtensible {
   protected void insertGui(JGuiExtensible gui) {
         
         super.insertGui(gui);
-        jtabbedPanel.add(this);
+        jtabbedPanel.add(gui);
     }    
     
     

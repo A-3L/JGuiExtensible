@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,6 +19,8 @@ import javax.swing.BoxLayout;
 public class JGuiSimple extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;
+      
+     
       
       public JGuiSimple() {
      

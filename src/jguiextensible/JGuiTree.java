@@ -66,7 +66,7 @@ public class JGuiTree extends JGuiExtensible {
         guiNode = new DefaultMutableTreeNode(gui);
         
         insertNode(nodoRaiz, guiNode);
-        
+       
     } 
     
     @Override

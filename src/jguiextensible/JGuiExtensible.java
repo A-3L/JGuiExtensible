@@ -5,10 +5,12 @@
 package jguiextensible;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
@@ -25,9 +27,10 @@ public class JGuiExtensible extends JPanel {
  
     public JGuiExtensible() {
         
+        super();
         setBackground(Color.GREEN);
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-         setBorder(BorderFactory.createCompoundBorder(
+        setBorder(BorderFactory.createCompoundBorder(
                    BorderFactory.createLineBorder(Color.red),
                    this.getBorder()));
         
@@ -44,6 +47,7 @@ public class JGuiExtensible extends JPanel {
     public void addExtensibleChild (JGuiExtensible child) {
        
         listaDeGuis.add(child);
+        System.out.println(child);
         insertGui(child);
         setSize(); 
        
@@ -51,12 +55,14 @@ public class JGuiExtensible extends JPanel {
     
     public void addExtensibleChildrenList (List<JGuiExtensible> childrenList) {
         
+       
         insertGuiList(childrenList, this);
     }
     
     protected void insertGui(JGuiExtensible child) {
-        
-       add(child);             
+       
+       super.add(child);
+                
     }
     
     protected void insertGuiList(List<JGuiExtensible> childrenList, JGuiExtensible parent) {
