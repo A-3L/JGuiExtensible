@@ -23,17 +23,13 @@ public class JGuiExtensible extends JPanel {
     private static final long serialVersionUID = 1L;
     
       List<JGuiExtensible> listaDeGuis = new ArrayList<>();
-   
+    
  
     public JGuiExtensible() {
         
-        super();
-        setBackground(Color.GREEN);
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        setBorder(BorderFactory.createCompoundBorder(
-                   BorderFactory.createLineBorder(Color.red),
-                   this.getBorder()));
-        
+        //setLayout(new GridLayout(1,0));
+        setBackground(Color.BLUE);
+            
     }
     
      public boolean setUpDialog() {
@@ -47,29 +43,26 @@ public class JGuiExtensible extends JPanel {
     public void addExtensibleChild (JGuiExtensible child) {
        
         listaDeGuis.add(child);
-        System.out.println(child);
+            System.out.println(child);
         insertGui(child);
-        setSize(); 
-       
+        setSize();      
     }
     
     public void addExtensibleChildrenList (List<JGuiExtensible> childrenList) {
-        
-       
+              
         insertGuiList(childrenList, this);
     }
     
     protected void insertGui(JGuiExtensible child) {
-       
-       super.add(child);
-                
+     
+          add(child);                 
     }
     
     protected void insertGuiList(List<JGuiExtensible> childrenList, JGuiExtensible parent) {
         
           childrenList.forEach((var gui)-> { 
             
-            insertGui(gui);               
+            insertGui(gui);          
         });             
     }
     

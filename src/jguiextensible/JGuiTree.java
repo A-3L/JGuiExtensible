@@ -32,6 +32,7 @@ public class JGuiTree extends JGuiExtensible {
     
     public JGuiTree() {
         
+        super();
         initialize();
         
     }

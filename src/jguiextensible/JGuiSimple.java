@@ -20,20 +20,24 @@ public class JGuiSimple extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;
       
-     
+     JPanel panel; 
       
       public JGuiSimple() {
      
-          setBackground(Color.PINK); 
-          setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-          add(Box.createHorizontalGlue());
+          super();
+          setBackground(Color.PINK);
+          panel = new JPanel();
+          panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+          add(panel);
+          
       
     }
     
     @Override
     protected void insertGui(JGuiExtensible gui) {
      
-      add(gui);
+      panel.add(gui);
+      panel.add(Box.createHorizontalGlue());
                
     }
     
