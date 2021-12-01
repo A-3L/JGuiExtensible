@@ -4,13 +4,16 @@
  */
 package jguiextensible;
 
+import java.awt.Dimension;
 import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
@@ -24,7 +27,7 @@ public class JGuiTree extends JGuiExtensible {
     JSplitPane jSplitPanel;
     JTree jTree;
     
-    DefaultMutableTreeNode nodoRaiz, parentNode, guiNode, selectedNode ;
+    DefaultMutableTreeNode nodoRaiz, parentNode, nodo, selectedNode ;
     DefaultTreeModel model;
     Object infoNode;
     JGuiExtensible panelNode;
@@ -38,7 +41,7 @@ public class JGuiTree extends JGuiExtensible {
     }
     
     private void initialize() {
-        
+               
         jSplitPanel = new JSplitPane();
         jScrollPanel = new JScrollPane();
         jTree = new JTree();
@@ -46,28 +49,58 @@ public class JGuiTree extends JGuiExtensible {
         nodoRaiz = new DefaultMutableTreeNode();
         model = new DefaultTreeModel(nodoRaiz);
         
+        initSplitPanel();
+        
+        initJTree();
+        
+        initJScrollPanel();
+                 
+        jSplitPanel.setLeftComponent(jScrollPanel);
+        
+        add(jSplitPanel);
+    
+    }
+    
+    private void initSplitPanel() {
+        
         jSplitPanel.setDividerLocation(-40);
         jSplitPanel.setDividerSize(2);
+        jSplitPanel.setPreferredSize(getPreferredSize());
+        jSplitPanel.setMinimumSize(new Dimension(100,100));
         
-        jTree.setModel(model);
-        jTree.setSelectionRow(1);
+    }
+    
+    private void initJTree() {
+        
+        jTree.setModel(model);   
+        jTree.setInvokesStopCellEditing(true);
+        jTree.setMaximumSize(null);
+        jTree.setMinimumSize(new Dimension(10,10));
+        jTree.setPreferredSize(new Dimension(100,100));
+        
+    }
+    
+    private void initJScrollPanel() {
         
         jScrollPanel.setViewportView(jTree);
+        jScrollPanel.setMinimumSize(new java.awt.Dimension(150, 150));
+        jScrollPanel.setPreferredSize(new java.awt.Dimension(150, 150));
         
-        jSplitPanel.setLeftComponent(jScrollPanel);
-    
     }
     
     @Override
     protected void insertGui(JGuiExtensible gui) {
         
-        super.insertGui(gui);
+        if (nodoRaiz.getUserObject()== null) {
+            nodoRaiz.setUserObject(gui);
+           jTree.setSelectionPath(getInitialPath());
+           visualizarGui();
+        }
+        nodo = new DefaultMutableTreeNode(gui);
         
-        nodoRaiz = new DefaultMutableTreeNode();
-        guiNode = new DefaultMutableTreeNode(gui);
+        insertNode(nodoRaiz, nodo);
+        treeSelectionListener();
         
-        insertNode(nodoRaiz, guiNode);
-       
     } 
     
     @Override
@@ -85,10 +118,16 @@ public class JGuiTree extends JGuiExtensible {
         });
          
         insertNode(nodoRaiz, parentNode);
-        treeSelectionListener();
-        
+        treeSelectionListener();    
     }
+     
+      private TreePath getInitialPath () {
+     
+        TreePath path = jTree.getPathForRow(0);
        
+       return path;
+    }
+      
      private void insertNode(DefaultMutableTreeNode parentNode, DefaultMutableTreeNode childNode) {
         
         int index= model.getChildCount(parentNode);       
@@ -96,25 +135,26 @@ public class JGuiTree extends JGuiExtensible {
         
     }
      
-     private void treeSelectionListener() {
+    private void treeSelectionListener() {
         
         jTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         jTree.addTreeSelectionListener((TreeSelectionEvent event) -> {
-            visualizarTree();
+            visualizarGui();
         });
          
     }
     
-    private void visualizarTree() {
-        
+    private void visualizarGui() {
+               
         TreePath selectedPath = jTree.getSelectionPath();
         
         selectedNode = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
         infoNode = selectedNode.getUserObject();       
         panelNode= (JGuiExtensible) infoNode;
         
-        jSplitPanel.setRightComponent(panelNode);
-        
+        jSplitPanel.setRightComponent(panelNode);        
     }
+    
+  
     
 }

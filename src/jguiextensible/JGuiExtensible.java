@@ -6,12 +6,14 @@ package jguiextensible;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -23,12 +25,13 @@ public class JGuiExtensible extends JPanel {
     private static final long serialVersionUID = 1L;
     
       List<JGuiExtensible> listaDeGuis = new ArrayList<>();
-    
+    JPanel panel;
  
     public JGuiExtensible() {
         
-        //setLayout(new GridLayout(1,0));
-        setBackground(Color.BLUE);
+          super();
+          setBackground(Color.PINK);
+          setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
             
     }
     
@@ -43,7 +46,7 @@ public class JGuiExtensible extends JPanel {
     public void addExtensibleChild (JGuiExtensible child) {
        
         listaDeGuis.add(child);
-            System.out.println(child);
+      
         insertGui(child);
         setSize();      
     }
@@ -55,7 +58,12 @@ public class JGuiExtensible extends JPanel {
     
     protected void insertGui(JGuiExtensible child) {
      
-          add(child);                 
+          panel = new JPanel();
+          panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+         
+          panel.add(child);
+           super.add(panel);
+          System.out.println("Pasox jge.insertGui");
     }
     
     protected void insertGuiList(List<JGuiExtensible> childrenList, JGuiExtensible parent) {
@@ -68,6 +76,12 @@ public class JGuiExtensible extends JPanel {
     
     protected void setSize() {
         
+       setMinimumSize(new Dimension(400,500));
+        
     }
     
+     public String toString() {
+       
+        return this.getName();
+    }
 }

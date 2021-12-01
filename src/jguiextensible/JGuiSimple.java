@@ -25,12 +25,14 @@ public class JGuiSimple extends JGuiExtensible {
       public JGuiSimple() {
      
           super();
-          setBackground(Color.PINK);
+          setBackground(Color.GRAY);
+        
           panel = new JPanel();
-          panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-          add(panel);
+          panel.setBackground(Color.red);
+          panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
           
-      
+          add(panel);
+              
     }
     
     @Override
@@ -38,7 +40,7 @@ public class JGuiSimple extends JGuiExtensible {
      
       panel.add(gui);
       panel.add(Box.createHorizontalGlue());
-               
+    
     }
     
 }
