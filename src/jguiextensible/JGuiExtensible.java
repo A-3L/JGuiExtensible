@@ -25,7 +25,6 @@ public class JGuiExtensible extends JPanel {
     private static final long serialVersionUID = 1L;
     
       List<JGuiExtensible> listaDeGuis = new ArrayList<>();
-    JPanel panel;
  
     public JGuiExtensible() {
         
@@ -48,7 +47,7 @@ public class JGuiExtensible extends JPanel {
         listaDeGuis.add(child);
       
         insertGui(child);
-        setSize();      
+        
     }
     
     public void addExtensibleChildrenList (List<JGuiExtensible> childrenList) {
@@ -58,11 +57,7 @@ public class JGuiExtensible extends JPanel {
     
     protected void insertGui(JGuiExtensible child) {
      
-          panel = new JPanel();
-          panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-         
-          panel.add(child);
-           super.add(panel);
+       add(child);
           System.out.println("Pasox jge.insertGui");
     }
     
@@ -72,12 +67,6 @@ public class JGuiExtensible extends JPanel {
             
             insertGui(gui);          
         });             
-    }
-    
-    protected void setSize() {
-        
-       setMinimumSize(new Dimension(400,500));
-        
     }
     
      public String toString() {

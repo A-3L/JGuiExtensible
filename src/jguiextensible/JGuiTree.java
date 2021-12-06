@@ -63,28 +63,27 @@ public class JGuiTree extends JGuiExtensible {
     
     private void initSplitPanel() {
         
-        jSplitPanel.setDividerLocation(-40);
+        jSplitPanel.setDividerLocation(0.25);
         jSplitPanel.setDividerSize(2);
-        jSplitPanel.setPreferredSize(getPreferredSize());
-        jSplitPanel.setMinimumSize(new Dimension(100,100));
-        
+        jSplitPanel.setResizeWeight(0.0);
+     
+         
     }
     
     private void initJTree() {
         
         jTree.setModel(model);   
         jTree.setInvokesStopCellEditing(true);
-        jTree.setMaximumSize(null);
-        jTree.setMinimumSize(new Dimension(10,10));
-        jTree.setPreferredSize(new Dimension(100,100));
+        jTree.setVisibleRowCount(jTree.getComponentCount());
+     
         
     }
     
     private void initJScrollPanel() {
         
         jScrollPanel.setViewportView(jTree);
-        jScrollPanel.setMinimumSize(new java.awt.Dimension(150, 150));
-        jScrollPanel.setPreferredSize(new java.awt.Dimension(150, 150));
+        jScrollPanel.setMinimumSize(new java.awt.Dimension(100, 100));
+        jScrollPanel.setPreferredSize(jTree.getPreferredScrollableViewportSize());
         
     }
     
@@ -152,7 +151,10 @@ public class JGuiTree extends JGuiExtensible {
         infoNode = selectedNode.getUserObject();       
         panelNode= (JGuiExtensible) infoNode;
         
-        jSplitPanel.setRightComponent(panelNode);        
+        
+        jSplitPanel.setRightComponent(panelNode);
+      
+        jSplitPanel.resetToPreferredSizes();        
     }
     
   
