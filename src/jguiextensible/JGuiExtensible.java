@@ -47,21 +47,19 @@ public class JGuiExtensible extends JPanel {
         listaDeGuis.add(child);
       
         insertGui(child);
-        
-    }
+          }
     
     public void addExtensibleChildrenList (List<JGuiExtensible> childrenList) {
               
-        insertGuiList(childrenList, this);
+        insertGuiList(childrenList);
     }
     
     protected void insertGui(JGuiExtensible child) {
      
        add(child);
-          System.out.println("Pasox jge.insertGui");
     }
     
-    protected void insertGuiList(List<JGuiExtensible> childrenList, JGuiExtensible parent) {
+    protected void insertGuiList(List<JGuiExtensible> childrenList) {
         
           childrenList.forEach((var gui)-> { 
             

@@ -6,6 +6,7 @@ package jguiextensible;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -46,7 +47,6 @@ public class JFactory {
         JPanel panelBtns = new JPanel(); 
         
         btnOk.addActionListener((ActionEvent e) -> {
-                                
             String st= new String("HELLO BABY");
             
             //jePanel.notificar(st);

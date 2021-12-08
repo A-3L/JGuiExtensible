@@ -53,14 +53,10 @@ public class JGuiSimple extends JGuiExtensible {
     private void setSizeByComponents(JGuiExtensible gui) {
         
         int heightPanel, widthPanel ;
-       
-      
-        
+              
         heightPanel = panel.getMinimumSize().height;
         widthPanel = panel.getMinimumSize().width;
-        
-        
-        
+              
         if (heightPanel > height) height=heightPanel;
         if (widthPanel > width) width=widthPanel;
         

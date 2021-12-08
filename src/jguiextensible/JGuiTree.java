@@ -23,6 +23,7 @@ import javax.swing.tree.TreeSelectionModel;
  */
 public class JGuiTree extends JGuiExtensible {
     
+    
     JScrollPane jScrollPanel;
     JSplitPane jSplitPanel;
     JTree jTree;
@@ -32,6 +33,7 @@ public class JGuiTree extends JGuiExtensible {
     Object infoNode;
     JGuiExtensible panelNode;
     
+    int height=0, width=0;
     
     public JGuiTree() {
         
@@ -63,28 +65,23 @@ public class JGuiTree extends JGuiExtensible {
     
     private void initSplitPanel() {
         
-        jSplitPanel.setDividerLocation(0.25);
+        //jSplitPanel.setDividerLocation(0.50);
         jSplitPanel.setDividerSize(2);
-        jSplitPanel.setResizeWeight(0.0);
-     
-         
+        jSplitPanel.setResizeWeight(0.20);        
     }
     
     private void initJTree() {
         
         jTree.setModel(model);   
         jTree.setInvokesStopCellEditing(true);
-        jTree.setVisibleRowCount(jTree.getComponentCount());
-     
-        
+       // jTree.setScrollsOnExpand(true);
+       
     }
     
     private void initJScrollPanel() {
         
         jScrollPanel.setViewportView(jTree);
-        jScrollPanel.setMinimumSize(new java.awt.Dimension(100, 100));
-        jScrollPanel.setPreferredSize(jTree.getPreferredScrollableViewportSize());
-        
+     
     }
     
     @Override
@@ -92,24 +89,25 @@ public class JGuiTree extends JGuiExtensible {
         
         if (nodoRaiz.getUserObject()== null) {
             nodoRaiz.setUserObject(gui);
+           
            jTree.setSelectionPath(getInitialPath());
            visualizarGui();
         }
-        nodo = new DefaultMutableTreeNode(gui);
         
+        nodo = new DefaultMutableTreeNode(gui);   
         insertNode(nodoRaiz, nodo);
-        treeSelectionListener();
-        
+            
+        setRightComponentSizeByGui(gui);      
+        treeSelectionListener();        
     } 
     
     @Override
-    protected void insertGuiList(List<JGuiExtensible> childrenList, JGuiExtensible parent) {
+    protected void insertGuiList(List<JGuiExtensible> childrenList) {
      
-        parentNode = new DefaultMutableTreeNode(parent);
+        parentNode = new DefaultMutableTreeNode(childrenList.get(0));
         
         childrenList.forEach((var gui)-> { 
         
-            super.insertGui(gui);
             DefaultMutableTreeNode node = new DefaultMutableTreeNode(gui);
             
             insertNode(parentNode, node);
@@ -127,18 +125,17 @@ public class JGuiTree extends JGuiExtensible {
        return path;
     }
       
-     private void insertNode(DefaultMutableTreeNode parentNode, DefaultMutableTreeNode childNode) {
-        
-        int index= model.getChildCount(parentNode);       
-        model.insertNodeInto(childNode, parentNode, index);
-        
+     private void insertNode(DefaultMutableTreeNode parent, DefaultMutableTreeNode child) {
+       
+        int index= model.getChildCount(parent);       
+        model.insertNodeInto(child, parent, index);    
     }
      
     private void treeSelectionListener() {
         
         jTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         jTree.addTreeSelectionListener((TreeSelectionEvent event) -> {
-            visualizarGui();
+             visualizarGui();
         });
          
     }
@@ -146,17 +143,30 @@ public class JGuiTree extends JGuiExtensible {
     private void visualizarGui() {
                
         TreePath selectedPath = jTree.getSelectionPath();
+        jTree.scrollPathToVisible(selectedPath);
         
         selectedNode = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
         infoNode = selectedNode.getUserObject();       
         panelNode= (JGuiExtensible) infoNode;
-        
-        
+                
         jSplitPanel.setRightComponent(panelNode);
-      
-        jSplitPanel.resetToPreferredSizes();        
+        jSplitPanel.setDividerLocation(jSplitPanel.getDividerLocation());
+        
     }
     
+    private void setRightComponentSizeByGui(JGuiExtensible gui) {
+     
+        int heightPanel, widthPanel ;
+         
+        heightPanel = gui.getMinimumSize().height;
+        widthPanel = gui.getMinimumSize().width;
+             
+        if (heightPanel > height) height=heightPanel;
+        if (widthPanel > width) width=widthPanel;
+        
+        jSplitPanel.getRightComponent().setMinimumSize(new Dimension(width,height));
+        
+    }
   
     
 }
