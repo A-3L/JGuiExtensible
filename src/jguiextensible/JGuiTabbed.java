@@ -24,7 +24,7 @@ public class JGuiTabbed extends JGuiExtensible {
       
       super();
       jtabbedPanel= new JTabbedPane();
-      add(jtabbedPanel);
+     
       setBackground(Color.BLUE);
         
   }
@@ -33,7 +33,7 @@ public class JGuiTabbed extends JGuiExtensible {
   protected void insertGui(JGuiExtensible gui) {
               
         jtabbedPanel.add(gui);
-        
+        add(jtabbedPanel);
         System.out.println("En GuiTab");
           
     }    

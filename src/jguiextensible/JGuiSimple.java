@@ -33,7 +33,6 @@ public class JGuiSimple extends JGuiExtensible {
           
           panel = new JPanel();
           panel. setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-          add(panel);
                     
     }
     
@@ -41,13 +40,11 @@ public class JGuiSimple extends JGuiExtensible {
     protected void insertGui(JGuiExtensible gui) {
      
       panel.add(gui);
-      add(Box.createHorizontalGlue());
-      
-      
+      panel.add(Box.createHorizontalGlue());
+      add(panel); 
+        
       //setSizeByComponents(gui);
       //setMinimumSize(panel.getMinimumSize());
-       System.out.println(panel.getMinimumSize());
-       System.out.println(getMinimumSize() +"Parent");
     }
     
     private void setSizeByComponents(JGuiExtensible gui) {

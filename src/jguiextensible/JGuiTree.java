@@ -57,9 +57,7 @@ public class JGuiTree extends JGuiExtensible {
         
         initJScrollPanel();
                  
-        jSplitPanel.setLeftComponent(jScrollPanel);
-        
-        add(jSplitPanel);
+        jSplitPanel.setLeftComponent(jScrollPanel);  
     
     }
     
@@ -98,7 +96,8 @@ public class JGuiTree extends JGuiExtensible {
         insertNode(nodoRaiz, nodo);
             
         setRightComponentSizeByGui(gui);      
-        treeSelectionListener();        
+        treeSelectionListener(); 
+        add(jSplitPanel);
     } 
     
     @Override
