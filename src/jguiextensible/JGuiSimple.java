@@ -39,24 +39,18 @@ public class JGuiSimple extends JGuiExtensible {
     
     @Override
     protected void insertGui(JGuiExtensible gui){
-    
-        System.out.println(gui);
-        setSizeByComponents(gui);
+         
       panel.add(gui);
       //panel.add(Box.createHorizontalGlue());
-     
-      
+          
         if(panel.getComponentCount()>2) {
+          
       System.err.println("ATENCION: SOLO SE PERMITEN INTEGRAR DOS GUIS DE TIPO SIMPLE");
       System.exit(0);
       }
-       
-      System.out.println(panel.getComponentCount());
-      setSizeByComponents(gui);
       
       add(panel); 
-           //setSizeByComponents(gui);
-           //setMinimumSize(panel.getMinimumSize());
+        
     }
     private void setSizeByComponents(JGuiExtensible gui) {
         
