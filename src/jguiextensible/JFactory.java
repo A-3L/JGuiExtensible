@@ -39,28 +39,6 @@ public class JFactory {
         
         return gui;
     }
-     
-     /*    private JFrame crearFrame(JGuiExtensible gui) {
-     
-     JFrame frame;
-     frame= new JFrame();
-     
-     frame.add(gui, BorderLayout.CENTER);
-     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     
-     frame.add(panelBtns(gui),BorderLayout.SOUTH);
-     frame.pack();
-     frame.setLocationRelativeTo(null);
-     frame.setVisible(true);
-     frame.setMinimumSize(frame.getMinimumSize());
-     
-     System.out.println(frame.getMinimumSize()+"frame minim");
-     System.out.println(frame.getContentPane().getMinimumSize()+"ContentPane tras Pack");
-     System.out.println(frame.getPreferredSize()+"frame prefer");
-     
-     return frame;
-     
-     }*/
    
      private JPanel panelBtns(JGuiExtensible gui) {
         
@@ -70,14 +48,14 @@ public class JFactory {
         
         btnOk.addActionListener((ActionEvent e) -> {
             String st= new String("HELLO BABY");
-            
+            System.out.println(st);
             //gui.notificar(st);
         });
          
         btnCancel.addActionListener((ActionEvent e) -> {
                     
             String st= new String("BYE BYE BABY");
-            
+            System.out.println(st);
           //  gui.notificar(st);
         });
          

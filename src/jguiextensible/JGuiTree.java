@@ -57,7 +57,8 @@ public class JGuiTree extends JGuiExtensible {
         
         initJScrollPanel();
                  
-        jSplitPanel.setLeftComponent(jScrollPanel);  
+        jSplitPanel.setLeftComponent(jScrollPanel); 
+       
     
     }
     
@@ -65,20 +66,27 @@ public class JGuiTree extends JGuiExtensible {
         
         //jSplitPanel.setDividerLocation(0.50);
         jSplitPanel.setDividerSize(2);
-        jSplitPanel.setResizeWeight(0.20);        
+        jSplitPanel.setResizeWeight(0.20); 
+       
     }
     
     private void initJTree() {
         
         jTree.setModel(model);   
         jTree.setInvokesStopCellEditing(true);
-       // jTree.setScrollsOnExpand(true);
+       
+        //jTree.setScrollsOnExpand(true);
        
     }
     
     private void initJScrollPanel() {
         
         jScrollPanel.setViewportView(jTree);
+        jScrollPanel.setMinimumSize(new Dimension(75,75));
+        
+        System.out.println(jScrollPanel.getMinimumSize()+"JSCROLL");
+        System.out.println(jTree.getMinimumSize()+"JTREE");
+        System.out.println(jSplitPanel.getLeftComponent().getMinimumSize()+"JSPLITLEFT");
      
     }
     
@@ -162,6 +170,8 @@ public class JGuiTree extends JGuiExtensible {
              
         if (heightPanel > height) height=heightPanel;
         if (widthPanel > width) width=widthPanel;
+        
+        System.out.println(jSplitPanel.getRightComponent());
         
         jSplitPanel.getRightComponent().setMinimumSize(new Dimension(width,height));
         

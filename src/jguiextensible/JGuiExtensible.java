@@ -5,6 +5,7 @@
 package jguiextensible;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -25,12 +26,15 @@ public class JGuiExtensible extends JPanel {
     private static final long serialVersionUID = 1L;
     
       List<JGuiExtensible> listaDeGuis = new ArrayList<>();
- 
+      JPanel panel; 
     public JGuiExtensible() {
         
           super();
           setBackground(Color.PINK);
-          setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+          
+           setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+          panel = new JPanel();
+          panel. setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
             
     }
     
@@ -41,13 +45,13 @@ public class JGuiExtensible extends JPanel {
         
         return ret;
     }
-    
+     
     public void addExtensibleChild (JGuiExtensible child) {
        
         listaDeGuis.add(child);
-      
+           
         insertGui(child); 
-        System.out.println("HOla");
+       
     }
     
     public void addExtensibleChildrenList (List<JGuiExtensible> childrenList) {
@@ -56,10 +60,11 @@ public class JGuiExtensible extends JPanel {
     }
     
     protected void insertGui(JGuiExtensible child) {
-     
-       add(child);
+        //setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+        panel.add(child);
+        add(panel);
        
-       System.out.println("CocaCola");
+       System.out.println("HOLA HOLA CocaCola");
     }
     
     protected void insertGuiList(List<JGuiExtensible> childrenList) {

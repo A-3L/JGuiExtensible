@@ -34,7 +34,6 @@ public class JGuiTabbed extends JGuiExtensible {
               
         jtabbedPanel.add(gui);
         add(jtabbedPanel);
-        System.out.println("En GuiTab");
           
     }    
     
