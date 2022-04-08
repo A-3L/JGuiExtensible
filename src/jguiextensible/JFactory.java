@@ -25,7 +25,7 @@ public class JFactory {
         
     } 
     
-     public JGuiExtensible createDialog(JTipoGui tipoGui) {
+     public JGuiExtensible createDialog(JTipoGui tipoGui, boolean withButtons) {
         
         switch (tipoGui) {
             
@@ -34,29 +34,34 @@ public class JFactory {
             case TREE   -> gui = new JGuiTree();
             default -> throw new AssertionError (tipoGui.name());
         }
-        gui.setLayout(new BorderLayout());
-        gui.add(panelBtns(gui), BorderLayout.SOUTH );
+        
+        if (withButtons) {
+         
+            gui.setLayout(new BorderLayout());
+            gui.add(panelBtns(gui), BorderLayout.PAGE_END ); 
+           
+      }
         
         return gui;
-    }
-   
+     }
+     
      private JPanel panelBtns(JGuiExtensible gui) {
         
         JButton btnOk = new JButton("OK");
         JButton btnCancel = new JButton("CANCEL");
         JPanel panel = new JPanel(); 
         
-        btnOk.addActionListener((ActionEvent e) -> {
+        btnOk.addActionListener((ActionEvent event) -> {
             String st= new String("HELLO BABY");
             System.out.println(st);
-            //gui.notificar(st);
+            gui.validar();
         });
          
-        btnCancel.addActionListener((ActionEvent e) -> {
+        btnCancel.addActionListener((ActionEvent event) -> {
                     
             String st= new String("BYE BYE BABY");
             System.out.println(st);
-          //  gui.notificar(st);
+             
         });
          
         panel.add(btnOk);

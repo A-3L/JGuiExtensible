@@ -4,15 +4,13 @@
  */
 package jguiextensible;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.Container;
 import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
@@ -23,48 +21,47 @@ public class JGuiSimple extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;
       
-    int height=0, width=0; 
-    JPanel panel; 
-      
-      public JGuiSimple() {
-     
-          super();       
-          setBackground(Color.red);
-          setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-          
-          panel = new JPanel();
-          panel. setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-                    
-    }
+    private  JPanel panel;
     
-    @Override
-    protected void insertGui(JGuiExtensible gui){
+    public JGuiSimple() {
+       
+       super();       
+       
+       panel = new JPanel();
+       panel. setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+       
+    }
+      
+    public void insertGui(JGuiExtensible gui){
          
-      panel.add(gui);
-      //panel.add(Box.createHorizontalGlue());
-          
-        if(panel.getComponentCount()>2) {
-          
-      System.err.println("ATENCION: SOLO SE PERMITEN INTEGRAR DOS GUIS DE TIPO SIMPLE");
-      System.exit(0);
-      }
+         panel.add(gui);
+         super.add(panel);
+           
+          if(panel.getComponentCount()>2) {
+        
+        System.err.println("ATENCION: SOLO SE PERMITEN INTEGRAR DOS GUIS DE TIPO SIMPLE "+ getComponentCount() );
+        System.exit(0);
+        }
+         
+    }
+   
+    /*  @Override*/
+      /*  public Component add(Component comp) {
       
-      add(panel); 
-        
+      panel.add(comp);
+      super.add(panel);
+      System.out.println(comp);
+      System.out.println(comp.getParent());
+      
+      return panel;
+      
+      }*/
     }
-    private void setSizeByComponents(JGuiExtensible gui) {
-        
-        int heightPanel, widthPanel ;
-        Insets insets = panel.getInsets();
-        System.out.println(insets+"Insets");
-              
-        heightPanel = panel.getMinimumSize().height;
-        widthPanel = panel.getMinimumSize().width;
-              
-        if (heightPanel > height) height=heightPanel;
-        if (widthPanel > width) width=widthPanel;
-        
-        setMinimumSize(new Dimension(width,height));
-    }
+     
+  
     
-}
+    
+   
+    
+   
+

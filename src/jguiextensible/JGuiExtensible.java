@@ -1,21 +1,23 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package jguiextensible;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
+import java.util.Objects;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -24,33 +26,29 @@ import javax.swing.JPanel;
 public class JGuiExtensible extends JPanel {
 
     private static final long serialVersionUID = 1L;
+
+  
     
-      List<JGuiExtensible> listaDeGuis = new ArrayList<>();
-      JPanel panel; 
+     private static final List<JGuiExtensible> listaDeGuis = new ArrayList<>();
+     private List<JGuiExtensible> listaDeGuisHijas = new ArrayList<>();
+     
+     int height=0, width=0;
+   
+     
+      
     public JGuiExtensible() {
         
-          super();
-          setBackground(Color.PINK);
-          
-           setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-          panel = new JPanel();
-          panel. setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-            
+       setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+       //listaDeGuis.add(this);
+       //setPreferredSize(new Dimension(600,400));
+ 
     }
-    
-     public boolean setUpDialog() {
-        
-        boolean ret= false;
-        
-        
-        return ret;
-    }
-     
-    public void addExtensibleChild (JGuiExtensible child) {
        
-        listaDeGuis.add(child);
-           
-        insertGui(child); 
+    public void addExtensibleChild (JGuiExtensible gui) {
+             
+        listaDeGuis.add(gui);
+        
+        insertGui(gui);
        
     }
     
@@ -60,11 +58,9 @@ public class JGuiExtensible extends JPanel {
     }
     
     protected void insertGui(JGuiExtensible child) {
-        //setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-        panel.add(child);
-        add(panel);
        
-       System.out.println("HOLA HOLA CocaCola");
+       // listaDeGuis.addAll(listaDeGuisHijas);
+            
     }
     
     protected void insertGuiList(List<JGuiExtensible> childrenList) {
@@ -74,9 +70,42 @@ public class JGuiExtensible extends JPanel {
             insertGui(gui);          
         });             
     }
-    
-     public String toString() {
-       
-        return this.getName();
+   
+    protected void validar() {
+        
+        listaDeGuis.forEach((var gui)-> { 
+            
+           if (gui.validacion()) System.out.println("Validar");
+                 
+        });
+          System.out.println("Validacion realizada");
+    } 
+   
+    protected boolean validacion() {
+        
+        return true;
     }
+    
+    
+     protected void notificarCambio(String id, Object obj) {
+            
+         listaDeGuis.forEach((var gui) -> {
+                      
+               gui.actualizarCambio(id,obj);    
+         });      
+    }
+     
+    protected void actualizarCambio(String id, Object obj) {
+    
+      // throw new UnsupportedOperationException("Metodo a completar x Diseñador de GUIS");
+        
+    }
+    
+    @Override
+    public String toString() {
+        
+        return getName();
+    }
+ 
+     
 }

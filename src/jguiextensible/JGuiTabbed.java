@@ -5,7 +5,10 @@
 package jguiextensible;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JTabbedPane;
 
@@ -17,25 +20,32 @@ public class JGuiTabbed extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;
     
-      JTabbedPane jtabbedPanel;
+      JTabbedPane jTabbedPanel;
      
 
   public JGuiTabbed() {
       
       super();
-      jtabbedPanel= new JTabbedPane();
      
-      setBackground(Color.BLUE);
-        
+      jTabbedPanel= new JTabbedPane();
+                                                                                           
   }
   
-  @Override
+   @Override
   protected void insertGui(JGuiExtensible gui) {
-              
-        jtabbedPanel.add(gui);
-        add(jtabbedPanel);
-          
-    }    
+  
+    jTabbedPanel.addTab(gui.getName(),gui);
+  
+    super.add(jTabbedPanel);
+  
+  }     
+   
+     @Override
+  public Component add (Component comp) {
+      
+    jTabbedPanel.addTab(comp.getName(), comp);
+    super.add(jTabbedPanel);
     
-    
+    return  this;
+  }
 }
