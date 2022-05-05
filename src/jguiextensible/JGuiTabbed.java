@@ -34,8 +34,10 @@ public class JGuiTabbed extends JGuiExtensible {
    @Override
   protected void insertGui(JGuiExtensible gui) {
   
-    jTabbedPanel.addTab(gui.getName(),gui);
-  
+   // jTabbedPanel.addTab(gui.getName(),gui);
+     jTabbedPanel.insertTab(gui.getName(), null,gui, null, 0);
+     jTabbedPanel.setSelectedIndex(0);
+     
     super.add(jTabbedPanel);
   
   }     
@@ -43,7 +45,8 @@ public class JGuiTabbed extends JGuiExtensible {
      @Override
   public Component add (Component comp) {
       
-    jTabbedPanel.addTab(comp.getName(), comp);
+   // jTabbedPanel.addTab(comp.getName(), comp);
+    jTabbedPanel.insertTab(comp.getName(), null,comp, null, 0);
     super.add(jTabbedPanel);
     
     return  this;

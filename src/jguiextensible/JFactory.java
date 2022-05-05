@@ -54,7 +54,8 @@ public class JFactory {
         btnOk.addActionListener((ActionEvent event) -> {
             String st= new String("HELLO BABY");
             System.out.println(st);
-            gui.validar();
+            gui.procesarEdicion(gui);
+            System.out.println(" Salida Final");
         });
          
         btnCancel.addActionListener((ActionEvent event) -> {

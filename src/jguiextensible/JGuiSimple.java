@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -25,7 +26,7 @@ public class JGuiSimple extends JGuiExtensible {
     
     public JGuiSimple() {
        
-       super();       
+       super();
        
        panel = new JPanel();
        panel. setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
@@ -39,7 +40,9 @@ public class JGuiSimple extends JGuiExtensible {
            
           if(panel.getComponentCount()>2) {
         
-        System.err.println("ATENCION: SOLO SE PERMITEN INTEGRAR DOS GUIS DE TIPO SIMPLE "+ getComponentCount() );
+        JOptionPane.showMessageDialog(null,"ATENCION: SOLO SE PERMITEN "
+                       + "INTEGRAR DOS GUIS DE TIPO SIMPLE");
+        System.err.println("ATENCION: SOLO SE PERMITEN INTEGRAR DOS GUIS DE TIPO SIMPLE " );
         System.exit(0);
         }
          
