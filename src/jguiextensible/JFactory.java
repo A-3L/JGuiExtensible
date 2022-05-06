@@ -55,13 +55,15 @@ public class JFactory {
             String st= new String("HELLO BABY");
             System.out.println(st);
             gui.procesarEdicion(gui);
-            System.out.println(" Salida Final");
+            System.out.println(" FIN de EDICION");
         });
          
         btnCancel.addActionListener((ActionEvent event) -> {
                     
             String st= new String("BYE BYE BABY");
             System.out.println(st);
+            gui.limpiarEdicion(gui);
+            System.exit(0);
              
         });
          

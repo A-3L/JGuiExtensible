@@ -132,12 +132,15 @@ public class JGuiExtensible extends JPanel {
             
             var option = JOptionPane.showInternalConfirmDialog(null,"Guardar Datos");
             switch (option) {
-                case JOptionPane.NO_OPTION : 
-            }
-                    
-               
-            guardarEdicion(gui);  
-            limpiarEdicion(gui);
+                case JOptionPane.NO_OPTION :  
+                    limpiarEdicion(gui);
+                    break; 
+                case JOptionPane.YES_OPTION:  
+                    guardarEdicion(gui);  
+                    break;
+                case JOptionPane.CANCEL_OPTION:              
+                    break;
+            }     
         }   
     } 
      
