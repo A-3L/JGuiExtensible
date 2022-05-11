@@ -4,12 +4,7 @@
  */
 package jguiextensible;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import javax.swing.JTabbedPane;
 
 /**
@@ -20,7 +15,7 @@ public class JGuiTabbed extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;
     
-      JTabbedPane jTabbedPanel;
+    private final JTabbedPane jTabbedPanel;
      
 
   public JGuiTabbed() {
@@ -28,14 +23,14 @@ public class JGuiTabbed extends JGuiExtensible {
       super();
      
       jTabbedPanel= new JTabbedPane();
-                                                                                           
+      super.add(jTabbedPanel);
   }
   
    @Override
   protected void insertGui(JGuiExtensible gui) {
   
-   // jTabbedPanel.addTab(gui.getName(),gui);
-     jTabbedPanel.insertTab(gui.getName(), null,gui, null, 0);
+     jTabbedPanel.addTab(gui.getName(),gui);
+     
      jTabbedPanel.setSelectedIndex(0);
      
     super.add(jTabbedPanel);
@@ -43,12 +38,12 @@ public class JGuiTabbed extends JGuiExtensible {
   }     
    
      @Override
-  public Component add (Component comp) {
-      
-   // jTabbedPanel.addTab(comp.getName(), comp);
-    jTabbedPanel.insertTab(comp.getName(), null,comp, null, 0);
-    super.add(jTabbedPanel);
-    
-    return  this;
-  }
+      public Component add (Component comp) {
+     
+     jTabbedPanel.addTab(comp.getName(), comp);
+     
+     super.add(jTabbedPanel);
+     
+     return this;
+     }
 }

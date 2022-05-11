@@ -6,6 +6,7 @@ package jguiextensible;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,43 +23,36 @@ public class JGuiSimple extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;
       
-    private  JPanel panel;
+   // private final  JPanel panel;
+    private int jguiCount=0;
     
     public JGuiSimple() {
        
        super();
        
-       panel = new JPanel();
+       /* panel = new JPanel();
        panel. setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-       
+       super.add(panel);*/
     }
       
+    @Override
     public void insertGui(JGuiExtensible gui){
          
-         panel.add(gui);
-         super.add(panel);
-           
-          if(panel.getComponentCount()>2) {
+        /*panel.add(gui);
+        super.add(panel);*/
+        super.insertGui(gui);
+        
+        jguiCount++;
+        if(jguiCount>2) {
         
         JOptionPane.showMessageDialog(null,"ATENCION: SOLO SE PERMITEN "
                        + "INTEGRAR DOS GUIS DE TIPO SIMPLE");
-        System.err.println("ATENCION: SOLO SE PERMITEN INTEGRAR DOS GUIS DE TIPO SIMPLE " );
-        System.exit(0);
-        }
          
-    }
-   
-    /*  @Override*/
-      /*  public Component add(Component comp) {
+        throw new UnsupportedOperationException("ATENCION: SOLO SE PERMITEN INTEGRAR DOS GUIS DE TIPO SIMPLE " );
       
-      panel.add(comp);
-      super.add(panel);
-      System.out.println(comp);
-      System.out.println(comp.getParent());
-      
-      return panel;
-      
-      }*/
+        }   
+      }
+     
     }
      
   

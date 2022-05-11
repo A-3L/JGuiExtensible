@@ -52,17 +52,21 @@ public class JFactory {
         JPanel panel = new JPanel(); 
         
         btnOk.addActionListener((ActionEvent event) -> {
-            String st= new String("HELLO BABY");
-            System.out.println(st);
+           
+            System.out.println("HELLO BABY");
+            
             gui.procesarEdicion(gui);
+            
             System.out.println(" FIN de EDICION");
         });
          
         btnCancel.addActionListener((ActionEvent event) -> {
-                    
-            String st= new String("BYE BYE BABY");
-            System.out.println(st);
+                   
+            System.out.println("BYE BYE BABY");
+            
             gui.limpiarEdicion(gui);
+            
+            System.out.println(" EXIT");
             System.exit(0);
              
         });

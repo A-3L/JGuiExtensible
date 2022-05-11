@@ -4,6 +4,8 @@
  */
 package jguiextensible;
 
+import java.awt.Dimension;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
@@ -19,41 +21,38 @@ public class JGuiExtensible extends JPanel {
     private static final long serialVersionUID = 1L;
  
   
-    private List <JGuiExtensible> listaDeGuisHijas = new ArrayList<>();
-    private static List <JGuiExtensible> listaDeGuis = new ArrayList<>();
+    private List <JGuiExtensible> listaDeGuis = new ArrayList<>();
+    private static List <JGuiExtensible> listeners = new ArrayList<>();
     
     private boolean exit;
     private boolean valido;
     
-    private JGuiExtensible parent;
-    private JGuiExtensible root;
     
     public JGuiExtensible() {
         
        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-       listaDeGuis.add(this);
+       listeners.add(this);
        
     }
        
     public void addExtensibleChild (JGuiExtensible gui) {
-       
-        listaDeGuisHijas.add(gui);
-             
-        insertGui(gui);
             
+        listaDeGuis.add(gui);
+       
+        insertGui(gui);
+        
     }
-    
+ 
     public void addExtensibleChildrenList (List<JGuiExtensible> childrenList) {
         
-        listaDeGuisHijas.addAll(childrenList);
+        listaDeGuis.addAll(childrenList);
         
         insertGuiList(childrenList);
     }
     
-    protected void insertGui(JGuiExtensible child) {
+    protected void insertGui(JGuiExtensible gui) {
        
-       // listaDeGuis.addAll(listaDeGuisHijas);
-            
+        add(gui);
     }
     
     protected void insertGuiList(List<JGuiExtensible> childrenList) {
@@ -65,22 +64,18 @@ public class JGuiExtensible extends JPanel {
     }
    
     protected boolean validarEdicion(JGuiExtensible gui) {
-          System.out.println(gui.listaDeGuisHijas);
-          System.out.println(gui+ " GUIVALIDAR");
-               
+                       
         exit=true;
         valido=false;
       
-        for (JGuiExtensible elem :gui.listaDeGuisHijas) {
-    
-              System.out.println("Validar " + elem);
+        for (JGuiExtensible elem :gui.listaDeGuis) {
     
             valido= validarEdicion(elem);
     
             if(!exit) break;
     
             if(!gui.validarDatos() || !elem.validarDatos()) {
-                System.out.println("Validando "+gui+" o " +elem );
+               
                 exit= false;
                 valido=false;
                 break;
@@ -103,8 +98,7 @@ public class JGuiExtensible extends JPanel {
         
         gui.guardarDatos();
         
-        gui.listaDeGuisHijas.forEach(elem -> {
-            
+        gui.listaDeGuis.forEach(elem -> {
             guardarEdicion(elem);
         });
     }
@@ -117,7 +111,7 @@ public class JGuiExtensible extends JPanel {
         
         gui.limpiarDatos();
         
-        gui.listaDeGuisHijas.forEach(elem -> {
+        gui.listaDeGuis.forEach(elem -> {
             limpiarEdicion(elem);
         });
     }
@@ -131,6 +125,7 @@ public class JGuiExtensible extends JPanel {
         if(validarEdicion(gui)) {
             
             var option = JOptionPane.showInternalConfirmDialog(null,"Guardar Datos");
+            
             switch (option) {
                 case JOptionPane.NO_OPTION :  
                     limpiarEdicion(gui);
@@ -146,9 +141,9 @@ public class JGuiExtensible extends JPanel {
      
     protected void notificarCambio(String id, Object value) {
           
-          System.out.println(listaDeGuis);
-          
-          listaDeGuis.forEach((var gui) -> {
+          System.out.println(listeners);
+    
+          listeners.forEach((var gui) -> {
               
               gui.actualizarCambio(id, value);
              
@@ -157,8 +152,8 @@ public class JGuiExtensible extends JPanel {
     
     protected void actualizarCambio(String id, Object value) {
      
-        // throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
-    
+      //throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
+       
      }
     
     @Override
@@ -167,5 +162,10 @@ public class JGuiExtensible extends JPanel {
         return getName();
     }
  
-     
+    /*  @Override
+    public Insets getInsets() {
+    
+    return new Insets(6,0,0,0);
+    
+    } */
 }
