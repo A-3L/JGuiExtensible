@@ -21,8 +21,8 @@ public class JGuiExtensible extends JPanel {
     private static final long serialVersionUID = 1L;
  
   
-    private List <JGuiExtensible> listaDeGuis = new ArrayList<>();
-    private static List <JGuiExtensible> listeners = new ArrayList<>();
+    List <JGuiExtensible> listaDeGuis = new ArrayList<>();
+    static List <JGuiExtensible> listeners = new ArrayList<>();
     
     private boolean exit;
     private boolean valido;
@@ -30,15 +30,15 @@ public class JGuiExtensible extends JPanel {
     
     public JGuiExtensible() {
         
-       setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-       listeners.add(this);
+      setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+      listeners.add(this);
        
     }
        
     public void addExtensibleChild (JGuiExtensible gui) {
             
         listaDeGuis.add(gui);
-       
+        
         insertGui(gui);
         
     }
@@ -89,8 +89,9 @@ public class JGuiExtensible extends JPanel {
         return valido;
     }
    
-    protected boolean validarDatos() {
-     
+    protected boolean validarDatos() { 
+        
+     //  throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
      return true;
      }
  
@@ -104,7 +105,8 @@ public class JGuiExtensible extends JPanel {
     }
     
     protected void guardarDatos() {
-    
+        
+        //  throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
     }
     
     protected void limpiarEdicion(JGuiExtensible gui ) {
@@ -117,7 +119,8 @@ public class JGuiExtensible extends JPanel {
     }
     
     protected void limpiarDatos() {
-            
+        
+        //  throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");        
     }
     
     protected void procesarEdicion(JGuiExtensible gui) {
@@ -127,14 +130,9 @@ public class JGuiExtensible extends JPanel {
             var option = JOptionPane.showInternalConfirmDialog(null,"Guardar Datos");
             
             switch (option) {
-                case JOptionPane.NO_OPTION :  
-                    limpiarEdicion(gui);
-                    break; 
-                case JOptionPane.YES_OPTION:  
-                    guardarEdicion(gui);  
-                    break;
-                case JOptionPane.CANCEL_OPTION:              
-                    break;
+                case JOptionPane.NO_OPTION -> limpiarEdicion(gui);
+                case JOptionPane.YES_OPTION -> guardarEdicion(gui);
+                case JOptionPane.CANCEL_OPTION -> { }
             }     
         }   
     } 
@@ -152,8 +150,8 @@ public class JGuiExtensible extends JPanel {
     
     protected void actualizarCambio(String id, Object value) {
      
-      //throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
-       
+    //  throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
+         
      }
     
     @Override

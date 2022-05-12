@@ -4,16 +4,7 @@
  */
 package jguiextensible;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -23,23 +14,17 @@ public class JGuiSimple extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;
       
-   // private final  JPanel panel;
     private int jguiCount=0;
     
     public JGuiSimple() {
        
        super();
-       
-       /* panel = new JPanel();
-       panel. setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-       super.add(panel);*/
+    
     }
       
     @Override
     public void insertGui(JGuiExtensible gui){
          
-        /*panel.add(gui);
-        super.add(panel);*/
         super.insertGui(gui);
         
         jguiCount++;

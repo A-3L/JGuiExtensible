@@ -16,14 +16,17 @@ public class JGuiTabbed extends JGuiExtensible {
     private static final long serialVersionUID = 1L;
     
     private final JTabbedPane jTabbedPanel;
+    
      
 
   public JGuiTabbed() {
       
-      super();
-     
-      jTabbedPanel= new JTabbedPane();
-      super.add(jTabbedPanel);
+     super();
+  
+     jTabbedPanel= new JTabbedPane();
+   
+     super.add(jTabbedPanel);
+    
   }
   
    @Override
@@ -33,17 +36,20 @@ public class JGuiTabbed extends JGuiExtensible {
      
      jTabbedPanel.setSelectedIndex(0);
      
-    super.add(jTabbedPanel);
+     super.add(jTabbedPanel);
   
-  }     
+  }      
    
-     @Override
-      public Component add (Component comp) {
-     
+    /**
+     *
+     * @param comp
+     * @return 
+     */
+    @Override
+  public Component add (Component comp) {
+ 
      jTabbedPanel.addTab(comp.getName(), comp);
      
-     super.add(jTabbedPanel);
-     
-     return this;
-     }
+    return super.add(jTabbedPanel);
+  }
 }

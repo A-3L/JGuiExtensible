@@ -7,8 +7,6 @@ package jguiextensible;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.List;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
@@ -64,16 +62,14 @@ public class JGuiTree extends JGuiExtensible {
         jTree.setInvokesStopCellEditing(true);
         jTree.setScrollsOnExpand(true);
         
-     
     }
     
      private void initJScrollPanel() {
         
         jScrollPanel = new JScrollPane();
-        jScrollPanel.setViewportView(jTree);
-       // jScrollPanel.setMinimumSize(jTree.getPreferredScrollableViewportSize());
-        
+        jScrollPanel.setViewportView(jTree);  
     }
+     
     private void initSplitPanel() {
         
         jSplitPanel = new JSplitPane();     
@@ -81,9 +77,7 @@ public class JGuiTree extends JGuiExtensible {
         jSplitPanel.setResizeWeight(0.2); 
         jSplitPanel.setLeftComponent(jScrollPanel);
         
-        super.add(jSplitPanel);
-        
-         
+        super.add(jSplitPanel);     
     }
     
     @Override
@@ -96,7 +90,6 @@ public class JGuiTree extends JGuiExtensible {
        setDimensions(gui);   
        treeSelectionListener();
       
-       //jTree.expandRow(0);
         super.add(jSplitPanel);  
     } 
     
@@ -193,7 +186,6 @@ public class JGuiTree extends JGuiExtensible {
     private void setLeftComponentMinimumSize() {
      
     JViewport view = jScrollPanel.getViewport();
-   // view.setViewSize(new Dimension(100,150));
     jSplitPanel.getLeftComponent().setMinimumSize(view.getViewSize());
     
     }
@@ -207,10 +199,8 @@ public class JGuiTree extends JGuiExtensible {
           
        setDimensions(comp);
        treeSelectionListener();
-      
-       super.add(jSplitPanel);  
-       
-        return this;     
+        
+        return  super.add(jSplitPanel);      
     }
     
 }
