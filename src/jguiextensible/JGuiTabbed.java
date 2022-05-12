@@ -25,7 +25,7 @@ public class JGuiTabbed extends JGuiExtensible {
   
      jTabbedPanel= new JTabbedPane();
    
-     super.add(jTabbedPanel);
+     //super.add(jTabbedPanel);
     
   }
   
