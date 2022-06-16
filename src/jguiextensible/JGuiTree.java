@@ -28,8 +28,7 @@ public class JGuiTree extends JGuiExtensible {
     
     private JScrollPane jScrollPanel;
     private JSplitPane jSplitPanel;
-    private JTree jTree;
-    private JGuiExtensible inGui;
+    private JTree jTree;   
     
     private DefaultMutableTreeNode nodoRaiz, parentNode, nodo,selectedNode ;
     private DefaultTreeModel model;
@@ -50,9 +49,9 @@ public class JGuiTree extends JGuiExtensible {
        nodoRaiz = new DefaultMutableTreeNode();
        model = new DefaultTreeModel(nodoRaiz);
         
-       initJTree();
-       initJScrollPanel();
-       initSplitPanel();
+      initJTree();
+      initJScrollPanel();
+      initSplitPanel();
      
     }
     
@@ -84,37 +83,38 @@ public class JGuiTree extends JGuiExtensible {
     protected void insertGui(JGuiExtensible gui) {
          
        nodo = new DefaultMutableTreeNode(gui);
-      
+         
        insertNode(nodoRaiz, nodo);  
      
        setDimensions(gui);   
        treeSelectionListener();
       
-        super.add(jSplitPanel);  
+       super.add(jSplitPanel);  
     } 
     
     @Override
     protected void insertGuiList(List<JGuiExtensible> childrenList) {
      
         parentNode = new DefaultMutableTreeNode(childrenList.get(0));
-       
-        insertNode(nodoRaiz, parentNode);
-          
-        childrenList.forEach((var gui)-> { 
-        
+     
+        childrenList.forEach((var gui)->{ 
+            
             DefaultMutableTreeNode node = new DefaultMutableTreeNode(gui);            
             insertNode(parentNode, node); 
-            
+           
             setDimensions(gui);
             treeSelectionListener();
             
             super.add(jSplitPanel); 
-        }); 
+        });
+        
+         insertNode(nodoRaiz, parentNode);
+     
     }
      
     private void insertNode(DefaultMutableTreeNode parent, DefaultMutableTreeNode child) {
        
-        int index= model.getChildCount(parent);
+        int index= model.getChildCount(parent); 
         model.insertNodeInto(child, parent, index);
         
          if(nodoRaiz.getUserObject()==null) {
@@ -123,15 +123,17 @@ public class JGuiTree extends JGuiExtensible {
         nodoRaiz.setUserObject(nodoRaiz.getNextNode().getUserObject());
         
         jTree.setSelectionRow(1);
-        jSplitPanel.setRightComponent((Component)nodoRaiz.getNextNode().getUserObject());
-        }
+        jSplitPanel.setRightComponent((Component)nodoRaiz.getNextNode().getUserObject());     
+        
+        }          
+         
     }
     
     private void setDimensions(Component gui) {
         
        setLeftComponentMinimumSize();
        setRightComponentMinimumSize(gui);
-       //setRightComponentPreferredSize(gui);
+       setRightComponentPreferredSize(gui);
        
     }
     
@@ -153,9 +155,8 @@ public class JGuiTree extends JGuiExtensible {
      
         jSplitPanel.setRightComponent(panelNode);    
     }
-    
-   
-     private void setRightComponentMinimumSize(Component gui) {
+      
+    private void setRightComponentMinimumSize(Component gui) {
     
     int height, width ;  
     
@@ -200,7 +201,7 @@ public class JGuiTree extends JGuiExtensible {
        setDimensions(comp);
        treeSelectionListener();
         
-        return  super.add(jSplitPanel);      
+       return  super.add(jSplitPanel);      
     }
     
 }

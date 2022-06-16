@@ -13,20 +13,17 @@ import javax.swing.JTabbedPane;
  */
 public class JGuiTabbed extends JGuiExtensible {
 
-    private static final long serialVersionUID = 1L;
-    
+    private static final long serialVersionUID = 1L;   
     private final JTabbedPane jTabbedPanel;
-    
-     
-
+    private int j=1;
+            
+          
   public JGuiTabbed() {
       
      super();
   
      jTabbedPanel= new JTabbedPane();
-   
-     //super.add(jTabbedPanel);
-    
+     
   }
   
    @Override
@@ -45,11 +42,24 @@ public class JGuiTabbed extends JGuiExtensible {
      * @param comp
      * @return 
      */
-    @Override
+       @Override
   public Component add (Component comp) {
- 
-     jTabbedPanel.addTab(comp.getName(), comp);
-     
-    return super.add(jTabbedPanel);
+  
+  jTabbedPanel.addTab(comp.getName(), comp);
+  
+  super.add(jTabbedPanel);
+  
+  return jTabbedPanel;
   }
+  
+  /*   @Override
+  public void addImpl(Component comp, Object constraints, int i) {
+  
+  String name= "tab"+j;
+  j++;
+  
+  jTabbedPanel.addTab(name, comp);
+  
+  super.addImpl(jTabbedPanel, BoxLayout.X_AXIS, i);
+  }*/
 }

@@ -4,12 +4,9 @@
  */
 package jguiextensible;
 
-import java.awt.Dimension;
-import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -21,33 +18,36 @@ public class JGuiExtensible extends JPanel {
     private static final long serialVersionUID = 1L;
  
   
-    List <JGuiExtensible> listaDeGuis = new ArrayList<>();
-    static List <JGuiExtensible> listeners = new ArrayList<>();
-    
-    private boolean exit;
-    private boolean valido;
+    protected ArrayList <JGuiExtensible> listaDeGuis;
+   
+    private boolean emptyGui=false;
+    private final JMediator mediator;
     
     
     public JGuiExtensible() {
-        
+                
       setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-      listeners.add(this);
-       
+      this.mediator = new JMediator();
+      this.listaDeGuis = new ArrayList<>();
+         
     }
        
     public void addExtensibleChild (JGuiExtensible gui) {
-            
+         
         listaDeGuis.add(gui);
-        
+            
+        mediator.addJGuiListener(this);
+        mediator.addJGuiListener(gui);
+             
         insertGui(gui);
         
     }
  
     public void addExtensibleChildrenList (List<JGuiExtensible> childrenList) {
         
-        listaDeGuis.addAll(childrenList);
-        
-        insertGuiList(childrenList);
+       listaDeGuis.addAll(childrenList);
+   
+       insertGuiList(childrenList);
     }
     
     protected void insertGui(JGuiExtensible gui) {
@@ -57,113 +57,70 @@ public class JGuiExtensible extends JPanel {
     
     protected void insertGuiList(List<JGuiExtensible> childrenList) {
         
-          childrenList.forEach((var gui)-> { 
+        childrenList.forEach((var gui)-> { 
             
             insertGui(gui);          
         });             
     }
    
-    protected boolean validarEdicion(JGuiExtensible gui) {
-                       
-        exit=true;
-        valido=false;
-      
-        for (JGuiExtensible elem :gui.listaDeGuis) {
+    protected final void procesarEdicion(JGuiExtensible gui) {
+          
+        mediator.procesarEdicion(gui);
+    } 
     
-            valido= validarEdicion(elem);
-    
-            if(!exit) break;
-    
-            if(!gui.validarDatos() || !elem.validarDatos()) {
-               
-                exit= false;
-                valido=false;
-                break;
-            }else  
-                valido=true;
-            }
-    
-        System.out.println("VALIDACION REALIZADA");
-        System.out.println(valido);
-         
-        return valido;
+    protected final boolean validarEdicion(JGuiExtensible gui) {
+           
+        return mediator.validarEdicion(gui);
     }
    
     protected boolean validarDatos() { 
         
-     //  throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
-     return true;
+      throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
      }
  
-    protected void guardarEdicion(JGuiExtensible gui) {
+    protected final void guardarEdicion(JGuiExtensible gui) {
         
-        gui.guardarDatos();
-        
-        gui.listaDeGuis.forEach(elem -> {
-            guardarEdicion(elem);
-        });
+        mediator.guardarEdicion(gui);
     }
     
     protected void guardarDatos() {
         
-        //  throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
+          throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
     }
     
-    protected void limpiarEdicion(JGuiExtensible gui ) {
+    protected final void limpiarEdicion(JGuiExtensible gui ) {
         
-        gui.limpiarDatos();
-        
-        gui.listaDeGuis.forEach(elem -> {
-            limpiarEdicion(elem);
-        });
+        mediator.limpiarEdicion(gui);
     }
     
     protected void limpiarDatos() {
         
-        //  throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");        
+          throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");        
     }
-    
-    protected void procesarEdicion(JGuiExtensible gui) {
+      
+    protected final void notificarCambio(String id, Object value) {
         
-        if(validarEdicion(gui)) {
-            
-            var option = JOptionPane.showInternalConfirmDialog(null,"Guardar Datos");
-            
-            switch (option) {
-                case JOptionPane.NO_OPTION -> limpiarEdicion(gui);
-                case JOptionPane.YES_OPTION -> guardarEdicion(gui);
-                case JOptionPane.CANCEL_OPTION -> { }
-            }     
-        }   
-    } 
-     
-    protected void notificarCambio(String id, Object value) {
-          
-          System.out.println(listeners);
-    
-          listeners.forEach((var gui) -> {
-              
-              gui.actualizarCambio(id, value);
-             
-        });  
+        mediator.notificarCambio(id, value);
     }
     
     protected void actualizarCambio(String id, Object value) {
-     
-    //  throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
-         
+       
+         throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");     
      }
+   
+    protected boolean isEmpty() {
+        
+        return emptyGui;
+    }
+    
+    protected void setEmpty(boolean bool) {
+        
+        emptyGui=bool;
+    }
     
     @Override
     public String toString() {
         
         return getName();
     }
- 
-    /*  @Override
-    public Insets getInsets() {
-    
-    return new Insets(6,0,0,0);
-    
-    } */
 }

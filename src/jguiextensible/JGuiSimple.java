@@ -4,7 +4,10 @@
  */
 package jguiextensible;
 
+import java.awt.GridLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -13,22 +16,26 @@ import javax.swing.JOptionPane;
 public class JGuiSimple extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;
-      
-    private int jguiCount=0;
+    
+    private JPanel panel;
+    private int guiCount=0;
     
     public JGuiSimple() {
        
        super();
-    
+       panel=new JPanel();
+       panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+       
     }
       
     @Override
     public void insertGui(JGuiExtensible gui){
          
-        super.insertGui(gui);
+        panel.add(gui);
+        super.add(panel);
         
-        jguiCount++;
-        if(jguiCount>2) {
+        guiCount++;
+        if(guiCount>2) {
         
         JOptionPane.showMessageDialog(null,"ATENCION: SOLO SE PERMITEN "
                        + "INTEGRAR DOS GUIS DE TIPO SIMPLE");

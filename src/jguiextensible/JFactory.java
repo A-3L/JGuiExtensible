@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  */
 public class JFactory {
     
-    JGuiExtensible panel,gui;
+    JGuiExtensible gui;
      
     public JFactory() {
         
@@ -41,7 +41,7 @@ public class JFactory {
             gui.add(panelBtns(gui), BorderLayout.PAGE_END ); 
            
       }
-        
+        gui.setEmpty(true);
         return gui;
      }
      
