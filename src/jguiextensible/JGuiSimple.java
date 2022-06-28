@@ -17,7 +17,7 @@ public class JGuiSimple extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;
     
-    private JPanel panel;
+    private final JPanel panel;
     private int guiCount=0;
     
     public JGuiSimple() {
@@ -30,7 +30,7 @@ public class JGuiSimple extends JGuiExtensible {
       
     @Override
     public void insertGui(JGuiExtensible gui){
-         
+      
         panel.add(gui);
         super.add(panel);
         

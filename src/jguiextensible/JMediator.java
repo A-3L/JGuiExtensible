@@ -18,83 +18,87 @@ final class JMediator {
     private boolean exit;
     private boolean valido;
     
-    private final static ArrayList <JGuiExtensible> listeners = new ArrayList<>();
-   
-
-    protected JMediator() {
-        
+    private final ArrayList <JGuiExtensible> listeners = new ArrayList<>();
+    private static JMediator instance;
+    
+    
+    private JMediator() {
+    
     }
     
+    protected static JMediator getInstance() {
+    
+    return (instance==null) ? instance= new JMediator() : instance;
+    
+    }
+     
     protected void addJGuiListener(JGuiExtensible gui) {
         
         if(!listeners.contains(gui))
         listeners.add(gui);
     }
     
-     protected void notificarCambio(String id, Object value) {
+    protected void notifyChanges (String id, Object value) {
           
-        System.out.println("LISTENERS: "+ listeners);
-          listeners.forEach((var gui) -> {
-          
-              if(!gui.isEmpty() ) gui.actualizarCambio(id, value);
-          
-          }); 
+           System.out.println("LISTENERS: "+ listeners);
+         listeners.forEach((var gui) -> {
+         
+         if(!gui.isWrapper() ) gui.updateChanges(id, value);
+         
+         }); 
     }
-    
-    protected void procesarEdicion(JGuiExtensible gui) {
+      
+    protected void processEdition (JGuiExtensible gui) {
           
-        if(validarEdicion(gui)) {
+        if(validateEdition(gui)) {
             
             var option = JOptionPane.showInternalConfirmDialog(null,"Guardar Datos");
             
             switch (option) {
                 
-                case JOptionPane.NO_OPTION -> limpiarEdicion(gui);
-                case JOptionPane.YES_OPTION -> guardarEdicion(gui);
+                case JOptionPane.NO_OPTION -> cleanEdition(gui);
+                case JOptionPane.YES_OPTION -> saveEdition(gui);
                 case JOptionPane.CANCEL_OPTION -> { }
             }     
         }   
     } 
      
-       protected boolean validarEdicion(JGuiExtensible gui) {
+    protected boolean validateEdition(JGuiExtensible gui) {
        
         valido=true;
         
-            if(!gui.isEmpty()) valido=gui.validarDatos();
+            if(!gui.isWrapper()) valido = gui.validateData();
             exit=valido;
             
                 for (var elem: gui.listaDeGuis) {
                    
                   if(!valido) break;
                                  
-                  exit= validarEdicion(elem);                         
+                  exit= validateEdition(elem);                         
                 }
         
         return exit;      
     }
        
-    protected void guardarEdicion(JGuiExtensible gui) {
+    protected void saveEdition(JGuiExtensible gui) {
     
-        if(!gui.isEmpty()) gui.guardarDatos();
+        if(!gui.isWrapper()) gui.saveData();
         
         gui.listaDeGuis.forEach((var elem) -> {
            
-            guardarEdicion(elem); 
+            saveEdition(elem); 
             
         });
     }
    
-     protected void limpiarEdicion(JGuiExtensible gui ) {
+     protected void cleanEdition(JGuiExtensible gui ) {
         
-        if(!gui.isEmpty()) gui.limpiarDatos();
+        if(!gui.isWrapper()) gui.cleanData();
         
         gui.listaDeGuis.forEach(elem -> {
            
-            limpiarEdicion(elem);
+            cleanEdition(elem);
             
         });
-    }
-     
-  
-    
+    } 
 }

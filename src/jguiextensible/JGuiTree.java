@@ -73,7 +73,7 @@ public class JGuiTree extends JGuiExtensible {
         
         jSplitPanel = new JSplitPane();     
         jSplitPanel.setDividerSize(2);
-        jSplitPanel.setResizeWeight(0.2); 
+        //jSplitPanel.setResizeWeight(0.2); 
         jSplitPanel.setLeftComponent(jScrollPanel);
         
         super.add(jSplitPanel);     
@@ -81,7 +81,7 @@ public class JGuiTree extends JGuiExtensible {
     
     @Override
     protected void insertGui(JGuiExtensible gui) {
-         
+      
        nodo = new DefaultMutableTreeNode(gui);
          
        insertNode(nodoRaiz, nodo);  
@@ -96,9 +96,10 @@ public class JGuiTree extends JGuiExtensible {
     protected void insertGuiList(List<JGuiExtensible> childrenList) {
      
         parentNode = new DefaultMutableTreeNode(childrenList.get(0));
+        insertNode(nodoRaiz, parentNode);
      
         childrenList.forEach((var gui)->{ 
-            
+                     
             DefaultMutableTreeNode node = new DefaultMutableTreeNode(gui);            
             insertNode(parentNode, node); 
            
@@ -108,7 +109,7 @@ public class JGuiTree extends JGuiExtensible {
             super.add(jSplitPanel); 
         });
         
-         insertNode(nodoRaiz, parentNode);
+         
      
     }
      

@@ -5,12 +5,8 @@
 package jguiextensible;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -19,7 +15,7 @@ import javax.swing.JPanel;
  */
 public class JFactory {
     
-    JGuiExtensible gui;
+    private JGuiExtensible gui;
      
     public JFactory() {
         
@@ -41,7 +37,7 @@ public class JFactory {
             gui.add(panelBtns(gui), BorderLayout.PAGE_END ); 
            
       }
-        gui.setEmpty(true);
+        gui.setWrapper(true);
         return gui;
      }
      
@@ -51,22 +47,22 @@ public class JFactory {
         JButton btnCancel = new JButton("CANCEL");
         JPanel panel = new JPanel(); 
         
-        btnOk.addActionListener((ActionEvent event) -> {
+        btnOk.addActionListener((var event) -> {
            
             System.out.println("HELLO BABY");
             
-            gui.procesarEdicion(gui);
+            gui.processEdition(gui);
             
-            System.out.println(" FIN de EDICION");
+            System.out.println("END of EDITION");
         });
          
-        btnCancel.addActionListener((ActionEvent event) -> {
+        btnCancel.addActionListener((var event) -> {
                    
             System.out.println("BYE BYE BABY");
             
-            gui.limpiarEdicion(gui);
+            gui.cleanEdition(gui);
             
-            System.out.println(" EXIT");
+            System.out.println("EXIT");
             System.exit(0);
              
         });
