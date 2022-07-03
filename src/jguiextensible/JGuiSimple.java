@@ -20,11 +20,11 @@ public class JGuiSimple extends JGuiExtensible {
     private final JPanel panel;
     private int guiCount=0;
     
-    public JGuiSimple() {
+    protected JGuiSimple() {
        
        super();
        panel=new JPanel();
-       panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+       panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
        
     }
       

@@ -37,7 +37,7 @@ public class JGuiTree extends JGuiExtensible {
     
     private int heightRightComponent =0, widthRightComponent=0;
        
-    public JGuiTree() {
+    protected JGuiTree() {
         
         super();
       

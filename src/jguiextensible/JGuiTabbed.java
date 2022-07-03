@@ -16,7 +16,7 @@ public class JGuiTabbed extends JGuiExtensible {
     private static final long serialVersionUID = 1L;   
     private final JTabbedPane jTabbedPanel;
           
-  public JGuiTabbed() {
+  protected JGuiTabbed() {
       
      super();
   

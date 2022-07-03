@@ -46,9 +46,13 @@ public class JGuiExtensible extends JPanel {
  
     public void addExtensibleChildrenList (List<JGuiExtensible> childrenList) {
         
-       listaDeGuis.addAll(childrenList);
-   
-       insertGuiList(childrenList);
+        listaDeGuis.addAll(childrenList);
+        
+        mediator.addJGuiListener(this);
+        mediator.addAllJGuiListeners(childrenList);
+        
+        insertGuiList(childrenList);
+                
     }
     
     protected void insertGui(JGuiExtensible gui) {
@@ -59,8 +63,7 @@ public class JGuiExtensible extends JPanel {
     protected void insertGuiList(List<JGuiExtensible> childrenList) {
         
         childrenList.forEach((var gui)-> { 
-            
-            
+                   
             insertGui(gui);          
         });             
     }

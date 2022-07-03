@@ -5,6 +5,7 @@
 package jguiextensible;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,6 +37,14 @@ final class JMediator {
         
         if(!listeners.contains(gui))
         listeners.add(gui);
+    }
+    
+    protected void addAllJGuiListeners(List<JGuiExtensible> childrenList) {
+        
+        childrenList.forEach((var gui)-> {
+              addJGuiListener(gui);
+        });
+   
     }
     
     protected void notifyChanges (String id, Object value) {
