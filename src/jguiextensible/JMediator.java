@@ -27,7 +27,7 @@ final class JMediator {
     
     }
     
-    protected static JMediator getInstance() {
+    protected synchronized static JMediator getInstance() {
     
     return (instance==null) ? instance= new JMediator() : instance;
     

@@ -29,7 +29,7 @@ public class JGuiSimple extends JGuiExtensible {
     }
       
     @Override
-    public void insertGui(JGuiExtensible gui){
+    protected void insertGui(JGuiExtensible gui){
       
         panel.add(gui);
         super.add(panel);

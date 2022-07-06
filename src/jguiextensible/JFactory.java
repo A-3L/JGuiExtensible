@@ -16,12 +16,18 @@ import javax.swing.JPanel;
 public class JFactory {
     
     private JGuiExtensible gui;
+    private static JFactory instance;
      
-    public JFactory() {
+    private JFactory() {
         
     } 
     
-     public JGuiExtensible createDialog(JTipoGui tipoGui, boolean withButtons) {
+    public synchronized static JFactory getInstance() {
+        
+        return (instance==null)? instance= new JFactory(): instance;
+    }
+    
+    public JGuiExtensible createDialog(JTipoGui tipoGui, boolean withButtons) {
         
         switch (tipoGui) {
             

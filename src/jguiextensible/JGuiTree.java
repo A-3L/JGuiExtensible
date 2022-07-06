@@ -51,7 +51,7 @@ public class JGuiTree extends JGuiExtensible {
         
       initJTree();
       initJScrollPanel();
-      initSplitPanel();
+      initJSplitPanel();
      
     }
     
@@ -69,7 +69,7 @@ public class JGuiTree extends JGuiExtensible {
         jScrollPanel.setViewportView(jTree);  
     }
      
-    private void initSplitPanel() {
+    private void initJSplitPanel() {
         
         jSplitPanel = new JSplitPane();     
         jSplitPanel.setDividerSize(2);
