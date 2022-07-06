@@ -22,14 +22,12 @@ public class JGuiExtensible extends JPanel {
     
    
     private boolean wrapper=false;
-    private transient final JMediator mediator;
-    
+       
     
     public JGuiExtensible() {
                
       setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
       this.listaDeGuis = new ArrayList<>();
-      this.mediator = JMediator.getInstance();
       
     }
        
@@ -37,8 +35,8 @@ public class JGuiExtensible extends JPanel {
          
         listaDeGuis.add(gui);
             
-        mediator.addJGuiListener(this);
-        mediator.addJGuiListener(gui);
+        JMediator.getInstance().addJGuiListener(this);
+        JMediator.getInstance().addJGuiListener(gui);
         
         insertGui(gui);
         
@@ -48,8 +46,8 @@ public class JGuiExtensible extends JPanel {
         
         listaDeGuis.addAll(childrenList);
         
-        mediator.addJGuiListener(this);
-        mediator.addAllJGuiListeners(childrenList);
+        JMediator.getInstance().addJGuiListener(this);
+        JMediator.getInstance().addAllJGuiListeners(childrenList);
         
         insertGuiList(childrenList);
                 
@@ -68,34 +66,14 @@ public class JGuiExtensible extends JPanel {
         });             
     }
    
-    protected final void processEdition (JGuiExtensible gui) {
-          
-        mediator.processEdition(gui);
-    } 
-    
-    protected final boolean validateEdition (JGuiExtensible gui) {
-           
-        return mediator.validateEdition(gui);
-    }
-   
     protected boolean validateData () { 
         
       throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
      }
- 
-    protected final void saveEdition (JGuiExtensible gui) {
-        
-        mediator.saveEdition(gui);
-    }
     
     protected void saveData() {
         
           throw new UnsupportedOperationException("Metodo a implementar x Diseñador de GUIS");
-    }
-    
-    protected final void cleanEdition(JGuiExtensible gui ) {
-        
-        mediator.cleanEdition(gui);
     }
     
     protected void cleanData() {
@@ -105,7 +83,7 @@ public class JGuiExtensible extends JPanel {
       
     protected final void notifyChanges (JGuiExtensible gui, String id, Object value) {
         
-        mediator.notifyChanges (id, value);
+        JMediator.getInstance().notifyChanges (id, value);
     }
     
     protected void updateChanges(String id, Object value) {

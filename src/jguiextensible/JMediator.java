@@ -19,7 +19,7 @@ final class JMediator {
     private boolean exit;
     private boolean valido;
     
-    private final ArrayList <JGuiExtensible> listeners = new ArrayList<>();
+    private final ArrayList <JGuiExtensible> jGuiListeners = new ArrayList<>();
     private static JMediator instance;
     
     
@@ -35,8 +35,8 @@ final class JMediator {
      
     protected void addJGuiListener(JGuiExtensible gui) {
         
-        if(!listeners.contains(gui))
-        listeners.add(gui);
+        if(!jGuiListeners.contains(gui))
+        jGuiListeners.add(gui);
     }
     
     protected void addAllJGuiListeners(List<JGuiExtensible> childrenList) {
@@ -49,8 +49,8 @@ final class JMediator {
     
     protected void notifyChanges (String id, Object value) {
           
-           System.out.println("LISTENERS: "+ listeners);
-         listeners.forEach((var gui) -> {
+           System.out.println("LISTENERS: "+ jGuiListeners);
+         jGuiListeners.forEach((var gui) -> {
          
          if(!gui.isWrapper() ) gui.updateChanges(id, value);
          

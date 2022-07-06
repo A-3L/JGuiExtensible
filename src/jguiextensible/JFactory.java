@@ -57,7 +57,7 @@ public class JFactory {
            
             System.out.println("HELLO BABY");
             
-            gui.processEdition(gui);
+            JMediator.getInstance().processEdition(gui);
             
             System.out.println("END of EDITION");
         });
@@ -66,7 +66,7 @@ public class JFactory {
                    
             System.out.println("BYE BYE BABY");
             
-            gui.cleanEdition(gui);
+            JMediator.getInstance().cleanEdition(gui);
             
             System.out.println("EXIT");
             System.exit(0);
