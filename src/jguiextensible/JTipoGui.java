@@ -5,7 +5,7 @@
 package jguiextensible;
 
 /**
- *
+ * Clase para enumerar los tipos de gui que pueden crearse.
  * @author a31r1z
  */
 public enum JTipoGui {

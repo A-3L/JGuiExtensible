@@ -4,32 +4,47 @@
  */
 package jguiextensible;
 
-import java.awt.GridLayout;
+import java.awt.Component;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  *
+ * Clase derivada de JGuiExtensible que genera una interfaz grafica 
+ * de una sola pagina. 
+ * 
  * @author a31r1z
+ * @see JGuiExtensible
  */
+
 public class JGuiSimple extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;
     
     private final JPanel panel;
-    private int guiCount=0;
+   
+   /**
+    * Constructor protegido.Devuelve una interfaz grafica de navegacion simple 
+    */   
     
-    protected JGuiSimple() {
+    public JGuiSimple() {
        
        super();
        panel=new JPanel();
        panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-       
+     
     }
-      
+    
+    /**
+     * Agrega e integra una GUI a la pagina de navegacion simple.Solo se permite integrar dos GUIs simples. 
+     * 
+     * @param gui gui a insertar
+     * @throws UnsupportedOperationException si se intentan integrar mas de dos paginas de navegacion simple.
+     */  
     @Override
-    protected void insertGui(JGuiExtensible gui){
+    protected void insertJGui(JGuiExtensible gui){
       
         panel.add(gui);
         super.add(panel);
@@ -44,8 +59,15 @@ public class JGuiSimple extends JGuiExtensible {
       
         }   
       }
-     
-    }
+    
+    /*   @Override
+    public void addImpl(Component comp, Object constraints, int i) {
+    this.getLayout().addLayoutComponent(comp.getName(), comp);
+    
+    
+    }*/
+    
+}
      
   
     

@@ -5,27 +5,52 @@
 package jguiextensible;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- *
+ * Clase factoria para la creacion de guis. 
+ * 
  * @author a31r1z
  */
 public class JFactory {
     
+    /**
+     * Gui reusable
+     */
     private JGuiExtensible gui;
+    
+    /**
+     * Instancia de JFactory.
+     */
     private static JFactory instance;
-     
+    
+    /**
+     * Constructor privado.Singleton.
+     */  
     private JFactory() {
         
     } 
     
+    /**
+    * Metodo sincronizado para acceder a la instancia de JFactory.Si la instancia no se ha creado previamente se crea.
+    *
+    *@return una unica instancia de JFactory 
+    *
+    */
+    
     public synchronized static JFactory getInstance() {
         
-        return (instance==null)? instance= new JFactory(): instance;
+        return (instance==null) ? instance = new JFactory() : instance;
     }
+    
+    /**
+     * Devuelve un dialogo del tipo tipoGui. Si el dialogo debe llevar botones de edicion, el parametro withButtons debe ser true. Si el dialogo debe crearse sin botones el parametor withButtons debe ser false.
+     * 
+     * @param tipoGui el tipo de gui a crear 
+     * @param withButtons true: gui con botones, false: gui sin botones. 
+     * @return una gui del tipo escogido. Con o sin botones.
+     */
     
     public JGuiExtensible createDialog(JTipoGui tipoGui, boolean withButtons) {
         
@@ -44,9 +69,16 @@ public class JFactory {
            
       }
         gui.setWrapper(true);
+        
         return gui;
      }
-     
+     /**
+      * Metodo interno para crear un panel con los botones Ok y Cancel en la parte inferior.
+      * 
+      * @param gui gui reusable para incluir en el panel con botones
+      * @return un panel con botones OK y Cancel
+      */
+    
      private JPanel panelBtns(JGuiExtensible gui) {
         
         JButton btnOk = new JButton("OK");
@@ -57,7 +89,7 @@ public class JFactory {
            
             System.out.println("HELLO BABY");
             
-            JMediator.getInstance().processEdition(gui);
+            JGestor.getInstance().processEdition(gui);
             
             System.out.println("END of EDITION");
         });
@@ -66,7 +98,7 @@ public class JFactory {
                    
             System.out.println("BYE BYE BABY");
             
-            JMediator.getInstance().cleanEdition(gui);
+            JGestor.getInstance().cleanEdition(gui);
             
             System.out.println("EXIT");
             System.exit(0);

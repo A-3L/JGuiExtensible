@@ -9,14 +9,22 @@ import javax.swing.JTabbedPane;
 
 /**
  *
+ * Clase derivada de JGuiExtensible que genera una interfaz grafica de
+ * navegacion mediante pestañas.
+ * 
  * @author a31r1z
+ * @see JGuiExtensible
  */
 public class JGuiTabbed extends JGuiExtensible {
 
     private static final long serialVersionUID = 1L;   
     private final JTabbedPane jTabbedPanel;
-          
-  protected JGuiTabbed() {
+   
+    /**
+     * Constructor protegido. Devuelve una interfaz grafica de navegacion mediante pestañas.  
+     * 
+     */
+  public  JGuiTabbed() {
       
      super();
   
@@ -24,8 +32,14 @@ public class JGuiTabbed extends JGuiExtensible {
      
   }
   
+  /**
+   * Metodo interno polimorfico para insertar una gui en otra.
+   * Sobreescribe el metodo de JGuiExtensible.
+   * 
+   * @param gui gui que se inserta.
+   */
    @Override
-  protected void insertGui(JGuiExtensible gui) {
+  protected void insertJGui(JGuiExtensible gui) {
   
      jTabbedPanel.addTab(gui.getName(),gui);
      
@@ -36,28 +50,17 @@ public class JGuiTabbed extends JGuiExtensible {
   }      
    
     /**
-     *
-     * @param comp
-     * @return 
+     * Sobreescribe el metodo de adicion de la clase base.
+     * 
+     * @param comp componente que se quiere añadir
+     * @return el componente añadido al JTabbedPanel.
      */
   @Override
   public Component add (Component comp) {
   
   jTabbedPanel.addTab(comp.getName(), comp);
   
-  super.add(jTabbedPanel);
-  
-  return jTabbedPanel;
+  return super.add(jTabbedPanel);
   }
   
-  /*   @Override
-  public void addImpl(Component comp, Object constraints, int i) {
-  
-  String name= "tab"+j;
-  j++;
-  
-  jTabbedPanel.addTab(name, comp);
-  
-  super.addImpl(jTabbedPanel, BoxLayout.X_AXIS, i);
-  }*/
 }
