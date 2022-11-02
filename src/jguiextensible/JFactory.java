@@ -1,41 +1,60 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/** 
+ * JGuiExtensible is a library that provides the necessary classes to implement
+ * a reusable graphical user interface pattern
+ * 
+ * Copyright (C) 2022 a31r1z
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package jguiextensible;
 
 import java.awt.BorderLayout;
+import java.io.Serializable;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * Clase factoria para la creacion de guis. 
+ * Factory class to create graphical user interfaces of diferent types. 
  * 
  * @author a31r1z
  */
-public class JFactory {
+public class JFactory implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     
     /**
-     * Gui reusable
+     * Reusable gui
      */
     private JGuiExtensible gui;
     
     /**
-     * Instancia de JFactory.
+     * JFactory instance.
      */
     private static JFactory instance;
     
     /**
-     * Constructor privado.Singleton.
+     * Private constructor.Singleton.
      */  
     private JFactory() {
         
     } 
     
     /**
-    * Metodo sincronizado para acceder a la instancia de JFactory.Si la instancia no se ha creado previamente se crea.
+    * Synchronized method to get the instance of JFactory.
+    * If the instance has not been created it creates it.
     *
-    *@return una unica instancia de JFactory 
+    *@return a single instance of JFactory 
     *
     */
     
@@ -45,11 +64,12 @@ public class JFactory {
     }
     
     /**
-     * Devuelve un dialogo del tipo tipoGui. Si el dialogo debe llevar botones de edicion, el parametro withButtons debe ser true. Si el dialogo debe crearse sin botones el parametor withButtons debe ser false.
+     * Returns a dialog of tipoGui type.
+     * If gui must wear edition buttons, the withButtons parameter must be true, also it must be false.
      * 
-     * @param tipoGui el tipo de gui a crear 
-     * @param withButtons true: gui con botones, false: gui sin botones. 
-     * @return una gui del tipo escogido. Con o sin botones.
+     * @param tipoGui the gui type to create. 
+     * @param withButtons true: gui cwith buttons, false: gui without buttons. 
+     * @return a gui of the selected typ. With or without buttons.
      */
     
     public JGuiExtensible createDialog(JTipoGui tipoGui, boolean withButtons) {
@@ -73,10 +93,10 @@ public class JFactory {
         return gui;
      }
      /**
-      * Metodo interno para crear un panel con los botones Ok y Cancel en la parte inferior.
+      * Internal method to create one panel with ok and cancel buttons on the bottom.
       * 
-      * @param gui gui reusable para incluir en el panel con botones
-      * @return un panel con botones OK y Cancel
+      * @param gui reusable gui to include in the panel.
+      * @return one panel with Ok and Cancel buttons.
       */
     
      private JPanel panelBtns(JGuiExtensible gui) {

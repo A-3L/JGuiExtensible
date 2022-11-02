@@ -1,42 +1,59 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/** 
+ * JGuiExtensible is a library that provides the necessary classes to implement
+ * a reusable graphical user interface pattern
+ * 
+ * Copyright (C) 2022 a31r1z
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package jguiextensible;
 
-import java.awt.Component;
+import java.io.Serializable;
 import javax.swing.JTabbedPane;
 
 /**
  *
- * Clase derivada de JGuiExtensible que genera una interfaz grafica de
- * navegacion mediante pestañas.
+ * Class that extends JGuiExtensible class.
+ * Creates a tab graphical user interface.
  * 
  * @author a31r1z
  * @see JGuiExtensible
  */
-public class JGuiTabbed extends JGuiExtensible {
+public class JGuiTabbed extends JGuiExtensible implements Serializable{
 
     private static final long serialVersionUID = 1L;   
     private final JTabbedPane jTabbedPanel;
    
     /**
-     * Constructor protegido. Devuelve una interfaz grafica de navegacion mediante pestañas.  
+     * Protected constructor. 
+     * Returns a tab graphical user interface.  
      * 
      */
-  public  JGuiTabbed() {
+  protected  JGuiTabbed() {
       
      super();
   
      jTabbedPanel= new JTabbedPane();
-     
+   
   }
   
   /**
-   * Metodo interno polimorfico para insertar una gui en otra.
-   * Sobreescribe el metodo de JGuiExtensible.
+   * Internal method to insert one gui into another.
+   * OvrWrites the method of JGuiExtensible.
    * 
-   * @param gui gui que se inserta.
+   * @param gui gui inserted.
    */
    @Override
   protected void insertJGui(JGuiExtensible gui) {
@@ -48,19 +65,5 @@ public class JGuiTabbed extends JGuiExtensible {
      super.add(jTabbedPanel);
   
   }      
-   
-    /**
-     * Sobreescribe el metodo de adicion de la clase base.
-     * 
-     * @param comp componente que se quiere añadir
-     * @return el componente añadido al JTabbedPanel.
-     */
-  @Override
-  public Component add (Component comp) {
-  
-  jTabbedPanel.addTab(comp.getName(), comp);
-  
-  return super.add(jTabbedPanel);
-  }
   
 }

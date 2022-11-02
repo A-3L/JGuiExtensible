@@ -1,47 +1,63 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/** 
+ * JGuiExtensible is a library that provides the necessary classes to implement
+ * a reusable graphical user interface pattern
+ * 
+ * Copyright (C) 2022 a31r1z
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package jguiextensible;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- * Clase gestora de la edicion y la comunicacion entre guis.
+ * Management class for edition and communication between Guis.
  * 
  * @author a31r1z
  */ 
-final class JGestor {
+final class JGestor implements Serializable{
     
     private static final long serialVersionUID = 1L;
     
     /**
-     * Booleanos para gestionar la validacion de edicion
+     * Booleans to manage the editing validation.
      */
     private boolean exit;
     private boolean valido;
     /**
-     * Lista de guis oyentes.
+     * Listeners gui list.
      */
     private final ArrayList <JGuiExtensible> jGuiListeners = new ArrayList<>();
     /**
-     * Instancia de JGestor
+     * Instance of JGestor
      */
     private static JGestor instance;
     
     /**
-     * Constructor privado.Singleton.
+     * Private constructor.Singleton.
      */
     private JGestor() {
     
     }
     
     /**
-     * Metodo sincronizado para acceder a la instancia de JGestor.Si la instancia no se ha creado previamente se crea.
+     * Synchronized method to acces instance of JGestor.If instance has not been created it creates the instance.
      * 
-     * @return una unica instancia de JGestor. 
+     * @return a single instance of JGestor. 
      */
     protected synchronized static JGestor getInstance() {
     
@@ -50,9 +66,9 @@ final class JGestor {
     }
     
     /**
-     * Añade una gui a la lista de oyentes.
+     * Adds a gui to listeners list.
      * 
-     * @param gui gui que se añade a la lista de oyentes. 
+     * @param gui gui added to listener list. 
      */
     protected void addJGuiListener(JGuiExtensible gui) {
         
@@ -61,9 +77,9 @@ final class JGestor {
     }
     
     /**
-     * Añade una lista de guis a la lista de guis oyentes.
+     * Adds a gui list to listeners list.
      * 
-     * @param childrenList lista de guis que se añade a la lista de guis oyentes.
+     * @param childrenList gui list added to listeners list.
      */
     protected void addAllJGuiListeners(List<JGuiExtensible> childrenList) {
         
@@ -74,15 +90,14 @@ final class JGestor {
     }
     
     /**
-     * Notifica a la lista de guis oyentes que se ha producido un evento, indicando el componente que lo ha provocado y 
-     * el valor de cambio.
+     * Notifies to gui listeners list that an event has been activated.
+     * It identifies the component that throwed the event and the change value.
      * 
-     * @param id identificador del componente que ha activado el evento.
-     * @param value valor de cambio.
+     * @param id identifies the component that has activated the event.
+     * @param value change value.
      */
     protected void notifyChanges (String id, Object value) {
           
-           System.out.println("LISTENERS: "+ jGuiListeners);
          jGuiListeners.forEach((var gui) -> {
          
          if(!gui.isWrapper()) gui.updateChanges(id, value);
@@ -91,9 +106,9 @@ final class JGestor {
     }
     
     /**
-     * Activa el proceso de validacion y almacenamiento de los datos editados en la gui.Si los datos son validados se da la opcion de guardar los datos, limpiar los datos introducidos o cancelar.
+     * Activate the process of validation and storage of the data edited in the GUI.If the data are validated, the option of saving the data is given, cleaning the data entered or cancel.
      * 
-     * @param gui gui que se quiere validar. 
+     * @param gui gui to validate. 
      */
     protected void processEdition (JGuiExtensible gui) {
           
@@ -111,10 +126,10 @@ final class JGestor {
     } 
     
     /**
-     * Valida los datos de edicion que se han introducido en cada una de las guis reusables
+     * Validates the edition data that has been entered in every reusable gui.
      * 
-     * @param gui gui que se quiere validar
-     * @return true o false si la validacion es correcta.
+     * @param gui gui to validate.
+     * @return true o false if validation is wright.
      */
     protected boolean validateEdition(JGuiExtensible gui) {
        
@@ -134,9 +149,9 @@ final class JGestor {
     }
      
     /**
-     * Guarda la edicion de los datos introducidos en cada una de las guis reusables.
+     * Saves the edition data that has been entered in every reusable gui.
      * 
-     * @param gui gui de la que se quiere guardar los datos. 
+     * @param gui gui to save data. 
      */
     protected void saveEdition(JGuiExtensible gui) {
     
@@ -150,9 +165,9 @@ final class JGestor {
     }
    
     /**
-     * Limpia los datos introducidos en la edicion de cada una de las guis.
+     * Cleans the edition data that has been entered in every reusable gui.
      * 
-     * @param gui gui de la que se quiere limpiar la edicion. 
+     * @param gui gui to clean data. 
      */
     protected void cleanEdition(JGuiExtensible gui ) {
         

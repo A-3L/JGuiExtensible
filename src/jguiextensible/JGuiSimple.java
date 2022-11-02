@@ -1,35 +1,50 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/** 
+ * JGuiExtensible is a library that provides the necessary classes to implement
+ * a reusable graphical user interface pattern
+ * 
+ * Copyright (C) 2022 a31r1z
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package jguiextensible;
 
-import java.awt.Component;
+import java.io.Serializable;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  *
- * Clase derivada de JGuiExtensible que genera una interfaz grafica 
- * de una sola pagina. 
+ * Class that extends JGuiExtensible class.
+ * Creates a simple graphical user interface.
  * 
  * @author a31r1z
  * @see JGuiExtensible
  */
 
-public class JGuiSimple extends JGuiExtensible {
+public class JGuiSimple extends JGuiExtensible implements Serializable{
 
     private static final long serialVersionUID = 1L;
     
     private final JPanel panel;
    
    /**
-    * Constructor protegido.Devuelve una interfaz grafica de navegacion simple 
+    * Protected constructor. 
+    * Returns a simple graphical user interface. 
     */   
     
-    public JGuiSimple() {
+    protected JGuiSimple() {
        
        super();
        panel=new JPanel();
@@ -38,17 +53,17 @@ public class JGuiSimple extends JGuiExtensible {
     }
     
     /**
-     * Agrega e integra una GUI a la pagina de navegacion simple.Solo se permite integrar dos GUIs simples. 
+     * Adds a gui to the simple gui.Only two simple guis are allowed. 
      * 
-     * @param gui gui a insertar
-     * @throws UnsupportedOperationException si se intentan integrar mas de dos paginas de navegacion simple.
+     * @param gui gui to add.
+     * @throws UnsupportedOperationException if more than two simple gui are going to add.
      */  
     @Override
     protected void insertJGui(JGuiExtensible gui){
       
         panel.add(gui);
         super.add(panel);
-        
+       
         guiCount++;
         if(guiCount>2) {
         
@@ -58,15 +73,7 @@ public class JGuiSimple extends JGuiExtensible {
         throw new UnsupportedOperationException("ATENCION: SOLO SE PERMITEN INTEGRAR DOS GUIS DE TIPO SIMPLE " );
       
         }   
-      }
-    
-    /*   @Override
-    public void addImpl(Component comp, Object constraints, int i) {
-    this.getLayout().addLayoutComponent(comp.getName(), comp);
-    
-    
-    }*/
-    
+    }
 }
      
   

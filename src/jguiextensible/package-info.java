@@ -17,14 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package jguiextensible;
 
 /**
- * Clase para enumerar los tipos de gui que pueden crearse.
- * @author a31r1z
+ * This library provides the necessary classes to implement 
+ * a reusable graphical user interface pattern.
  */
-public enum JTipoGui {
-    
-    SIMPLE, TABBED, TREE ;
-    
-}
+package jguiextensible;

@@ -1,35 +1,51 @@
- /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/** 
+ * JGuiExtensible is a library that provides the necessary classes to implement
+ * a reusable graphical user interface pattern
+ * 
+ * Copyright (C) 2022 a31r1z
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package jguiextensible;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 /**
- * Clase base de la jerarquia de guis reusables.
+ * Base class of the hierarchy of reusable Guis.
  * 
  * @author a31r1z
  */
-public class JGuiExtensible extends JPanel {
+public class JGuiExtensible extends JPanel implements Serializable{
 
     private static final long serialVersionUID = 1L;
     
     /**
-     * Lista de guis hijas
+     * List of children guis
      */
     protected ArrayList <JGuiExtensible> JGuiChildrenList; 
     /**
-     * Contador de guis añadidas
+     * Added guis counter
      */
     protected int guiCount;
     private boolean wrapper=false;
     
     /**
-     * Constructor de la clase base. Boxlayout como layout por defecto,
+     * Base class constructor. Boxlayout as default layout.
      */  
     public JGuiExtensible() {
       
@@ -37,12 +53,13 @@ public class JGuiExtensible extends JPanel {
       setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
       this.JGuiChildrenList = new ArrayList<>();
       
+      
     }
     
     /**
-     * Añade una gui hija a la gui.
+     * Adds a gui child to the gui.
      * 
-     * @param gui gui que se añade.
+     * @param gui gui added.
      */  
     public void addJGui (JGuiExtensible gui) {
          
@@ -56,8 +73,9 @@ public class JGuiExtensible extends JPanel {
     }
     
     /**
-     * Añade una lista de guis hijas a la gui 
-     * @param childrenList lista de hijas que se añade
+     * Adds a list of guis children to the gui. 
+     * 
+     * @param childrenList gui children list added. 
      */
     public void addJGuiChildrenList (List<JGuiExtensible> childrenList) {
         
@@ -71,7 +89,7 @@ public class JGuiExtensible extends JPanel {
     }
     
     /**
-     * Inserta una gui en otra.
+     * Insert one gui into another
      * 
      * @param gui gui que se inserta
      */
@@ -81,9 +99,9 @@ public class JGuiExtensible extends JPanel {
     }
     
     /**
-     * Inserta una lista de guis en otra.
+     * Insert one gui list into another
      * 
-     * @param childrenList lista de guis que se inserta
+     * @param childrenList gui list that is added
      */
     protected void insertJGuiList(List<JGuiExtensible> childrenList) {
         
@@ -94,10 +112,10 @@ public class JGuiExtensible extends JPanel {
     }
    
     /**
-     * Valida los datos introducidos en la gui.Metodo a instanciar por el desarrollador.
+     * Validates the data entered in the gui. Method to be implemented by developer.
      * 
-     * @return true o false si la validacion ha tenido exito
-     * @throws UnsupportedOperationException si se implementa el metodo.
+     * @return true o false if the validation is achieved.
+     * @throws UnsupportedOperationException if the method is not implemented.
      */
     protected boolean validateData () { 
         
@@ -105,9 +123,9 @@ public class JGuiExtensible extends JPanel {
      }
     
     /**
-     * Guarda los datos introducidos en la gui.Metodo a instanciar por el desarrollador.
+     * Saves the data entered in the gui. Method to be implemented by developer.
      * 
-     * @throws UnsupportedOperationException si el metodo no se implementa.
+     * @throws UnsupportedOperationException if the method is not implemented.
      */
     protected void saveData() {
         
@@ -115,9 +133,9 @@ public class JGuiExtensible extends JPanel {
     }
     
     /**
-     * Limpia los datos introducidos en los componentes de la gui. Metodo a instanciar por el desarrollador.
+     * Cleans the data entered in the gui. Method to be implemented by developer.
      * 
-     * @throws UnsupportedOperationException si el metodo no se implementa.
+     * @throws UnsupportedOperationException if the method is not implemented.
      */
     protected void cleanData() {
         
@@ -125,10 +143,11 @@ public class JGuiExtensible extends JPanel {
     }
     
     /**
-     * Avisa al resto de guis que se ha producido un evento, indicando el componente que lo ha provocado y el valor de cambio.
+     * Warns the rest of guis that an event has been throwed. Notifies the component that has throwed the event
+     * and the change value.
      * 
-     * @param id identificador del componente que activo el evento.
-     * @param value valor de cambio.
+     * @param id identifies the component that throws the event
+     * @param value change value.
      */
     protected final void notifyChanges (String id, Object value) {
         
@@ -136,11 +155,13 @@ public class JGuiExtensible extends JPanel {
     }
     
     /**
-     * Actualiza los componentes que estan esperando por un evento.Metodo a implementar por el desarrollador. Se le pasa el identificador del componente que ha activado el evento y el valor de cambio.
+     * Updates the componentes that are listening for an event.
+     * Method to be implemented by developer.
+     * The arguments are the identifier of the component that has activated the event and the change value.
      *
-     * @param id identificador del componente que ha activado el evento
-     * @param value valor de cambio.
-     * @throws UnsupportedOperationException si el metodo no se implementa.
+     * @param id identifier of the component that has activated the event.
+     * @param value change value.
+     * @throws UnsupportedOperationException if the method is not implemented.
      */
     protected void updateChanges(String id, Object value) {
        
@@ -148,9 +169,9 @@ public class JGuiExtensible extends JPanel {
      }
    
     /**
-     * Determina si la gui es una gui vacia que funciona como envoltorio de otras guis.
+     * It determines if the gui is an empty gui that wraps other guis.
      * 
-     * @return true o false si es una gui vacia.  
+     * @return true o false if it is an empty gui.  
      */
     protected boolean isWrapper() {
         
@@ -158,9 +179,9 @@ public class JGuiExtensible extends JPanel {
     }
     
     /**
-     * Configura la gui estableciendo si es una gui vacia o una gui diseñada.
+     * Sets the gui as an empty gui or designed gui.
      * 
-     * @param bool true es gui vacia, false es gui diseñada.
+     * @param bool true is an empty gui, false is a designed gui.
      */
     protected void setWrapper(boolean bool) {
         
@@ -169,8 +190,9 @@ public class JGuiExtensible extends JPanel {
     }
     
     /**
-     * Sobreescribe el metodo de la clase Object
-     * @return el nombre de la gui
+     * Overwrites the method of th Object class
+     * 
+     * @return gui´s name
      */
      @Override
     public String toString() {

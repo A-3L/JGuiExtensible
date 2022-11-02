@@ -1,11 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/** 
+ * JGuiExtensible is a library that provides the necessary classes to implement
+ * a reusable graphical user interface pattern
+ * 
+ * Copyright (C) 2022 a31r1z
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package jguiextensible;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.io.Serializable;
 import java.util.List;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -19,44 +35,45 @@ import javax.swing.tree.TreeSelectionModel;
 
 /**
  *
- * Clase derivada de JGuiExtensible que genera una interfaz grafica de
- * navegacion en estructura de arbol.
+ * Class that extends JGuiExtensible class.
+ * Creates a tree graphical user interface.
  * 
  * @author a31r1z
  * @see JGuiExtensible
  */
-public class JGuiTree extends JGuiExtensible {
+public class JGuiTree extends JGuiExtensible implements Serializable{
 
     private static final long serialVersionUID = 1L;
     
     /**
-     * Objetos arbol, panel de desplazamiento y panel dividido para la construccion de la vista
+     * Diferent objects for the construction of the view.
      */
     private JScrollPane jScrollPanel;
     private JSplitPane jSplitPanel;
     private JTree jTree;   
     
     /**
-     * Objetos y nodos para la gestion de la insercion de nodos en la estructura de arbol.
+     * Objects and nodes for node insertion management in the tree structure.
      */
     private DefaultMutableTreeNode rootNode, parentNode, nodo,selectedNode ;
-    private Object infoNode;
+    transient private Object infoNode;
     private Component panelNode;
     /**
-     * Modelo de datos del arbol
+     * Tree data model.
      */
     private DefaultTreeModel model;
     
     /**
-     * Enteros para la configuracion de altura y anchura de la vista
+     * Integers for height and width settings of the view. 
      */
     private int heightRightComponent =0, widthRightComponent=0;
     
     /**
-     * Constructor protegido. Devuelve una interfaz grafica de navegacion en estructura de arbol. 
+     * Protedted constructor. 
+     * Returns a tree graphical user interface. 
      * 
      */
-    public JGuiTree() {
+    protected JGuiTree() {
         
         super();
       
@@ -64,7 +81,7 @@ public class JGuiTree extends JGuiExtensible {
     }
     
     /**
-     * Metodo de inicializacion de la gui.
+     * Method to initialize the gui. 
      */
     private void initialize() {
        
@@ -78,7 +95,7 @@ public class JGuiTree extends JGuiExtensible {
     }
     
     /**
-     * Metodo de inicializacion del arbol.
+     * Method to initialize the tree.
      */
     private void initJTree() {
          
@@ -89,7 +106,7 @@ public class JGuiTree extends JGuiExtensible {
     }
     
     /**
-     * Metodo de inicializacion del panel de desplazamiento.
+     * Method to initialize the scrollpanel.
      */
     private void initJScrollPanel() {
         
@@ -97,7 +114,7 @@ public class JGuiTree extends JGuiExtensible {
         jScrollPanel.setViewportView(jTree);  
     }
     /**
-     * Metodo de inicializacion del panel dividido.
+     * Method to initialize the splitpanel.
      */ 
     private void initJSplitPanel() {
         
@@ -110,10 +127,10 @@ public class JGuiTree extends JGuiExtensible {
     }
     
     /**
-     * Metodo interno polimorfico para insertar una gui en otra.
-     * Sobreescribe el metodo de JGuiExtensible.
+     * Internal method to add one gui into another.
+     * Overwrites the same method in JGuiExtensible class.
      * 
-     * @param gui guia que se inserta. 
+     * @param gui gui to add. 
      */
     @Override
     protected void insertJGui(JGuiExtensible gui) {
@@ -121,8 +138,7 @@ public class JGuiTree extends JGuiExtensible {
        nodo = new DefaultMutableTreeNode(gui);
            
        insertNode(rootNode,nodo);
-      //insert(this, gui);
-             
+               
        setDimensions(gui);   
        treeSelectionListener();
       
@@ -130,9 +146,10 @@ public class JGuiTree extends JGuiExtensible {
     } 
     
     /**
-     * Metodo interno polimorfico para insertar una lista de guis en otra
+     * Internal method to add one gui list into another gui.
+     * Overwrites the same method in JGuiExtensible class.
      * 
-     * @param childrenList lista de guis que se inserta
+     * @param childrenList gui list to add.
      */
     @Override
     protected void insertJGuiList(List<JGuiExtensible> childrenList) {
@@ -154,30 +171,12 @@ public class JGuiTree extends JGuiExtensible {
          
     }
     
-    /*  private void insert(JGuiExtensible parent, JGuiExtensible child) {
-    
-    DefaultMutableTreeNode node1 = new DefaultMutableTreeNode(parent);
-    DefaultMutableTreeNode node2 = new DefaultMutableTreeNode(child);
-    
-    int index= model.getChildCount(node1);
-    model.insertNodeInto(node2, node1, index);
-    
-    if(rootNode.getUserObject()==null) {
-    
-    jTree.setModel(model);
-    rootNode.setUserObject(node2.getUserObject());
-    jTree.setSelectionRow(0);
-    jSplitPanel.setRightComponent((Component)rootNode.getUserObject());
-    }
-    
-    
-    }*/
-    
     /**
-     * Metodo para la insercion de nodos en la estructura de arbol.
+     * Method for the insertion of nodes into the tree structure.
      * 
-     * @param parent nodo padre al que se le añade un nodo hijo
-     * @param child  nodo hijo que se añade a un nodo padre
+     * @param parent father node to add a gui child node.
+     * @param child  child node to add to a parent node
+     * 
      */
     private void insertNode(DefaultMutableTreeNode parent, DefaultMutableTreeNode child) {
             
@@ -188,26 +187,28 @@ public class JGuiTree extends JGuiExtensible {
             
             jTree.setModel(model);
             rootNode.setUserObject(child.getUserObject());
-            jTree.setSelectionRow(0);
+            jTree.setSelectionRow(1);
             jSplitPanel.setRightComponent((Component)rootNode.getNextNode().getUserObject());
         }
            
     }
     
     /**
-     * Configura las dimensiones minima y preferida del panel dividido en funcion de las guis insertadas.
-     * @param gui 
+     * Set de minimum and preferred dimensions of splitpanel according to the guis added.
+     * 
+     * @param gui gui that his dimension must be set 
      */
     private void setDimensions(Component gui) {
         
        setLeftComponentMinimumSize();
        setRightComponentMinimumSize(gui);
        setRightComponentPreferredSize(gui);
+     
        
     }
     
     /**
-     * Metodo para determinar el nodo seleccionado y lanzar el evento para activar la visualizacion de guis
+     * Method to determine the selected node and activate the event to throw the gui visualization.
      */
     private void treeSelectionListener() {
                   
@@ -218,7 +219,7 @@ public class JGuiTree extends JGuiExtensible {
     }
     
     /**
-     * Metodo para visualizar la gui almacenada en el nodo.
+     * Method to visualize the gui stored in a node. 
      */
     private void visualizeGui() {
                     
@@ -232,8 +233,8 @@ public class JGuiTree extends JGuiExtensible {
     }
     
     /**
-     * Configura la dimension minima de la vista derecha del panel dividido en funcion de la gui insertada.
-     * @param gui gui insertada en el panel dividido
+     * Sets the minimum dimension of the right view of the splitpanel according the inserted gui.
+     * @param gui inserted gui in the splitpanel
      */
     private void setRightComponentMinimumSize(Component gui) {
     
@@ -250,8 +251,8 @@ public class JGuiTree extends JGuiExtensible {
     }
     
     /**
-     * Configura la dimension preferida de la vista derecha del panel dividido en funcion de la gui insertada.
-     * @param gui gui insertada en el panel dividido
+     * Sets the preferred dimension of the right view of the splitpanel according the inserted gui.
+     * @param guiinserted gui in the splitpanel
      */
     private void setRightComponentPreferredSize(Component gui) {
     
@@ -268,32 +269,12 @@ public class JGuiTree extends JGuiExtensible {
     }
     
     /**
-     * Configura la dimension minima de la vista izquierda del panel dividido en funcion de la gui insertada.
+     * Sets the minimum dimension of the left view of the splitpanel according the inserted gui.
      */
     private void setLeftComponentMinimumSize() {
      
     JViewport view = jScrollPanel.getViewport();
     jSplitPanel.getLeftComponent().setMinimumSize(view.getViewSize());
     
-    }
-    
-    /**
-     *  Sobreescribe el metodo de adicion de la clase base.
-     * 
-     * @param comp componente que se quiere añadir
-     * @return componente añadido al panel dividido
-     */
-    @Override
-    public Component add(Component comp) {
-        
-       nodo = new DefaultMutableTreeNode(comp);
-      
-       insertNode(rootNode, nodo);  
-          
-       setDimensions(comp);
-       treeSelectionListener();
-        
-       return  super.add(jSplitPanel);      
-    }
-    
+    }   
 }
